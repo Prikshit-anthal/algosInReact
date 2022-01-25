@@ -5,11 +5,14 @@ function Homepage()
 {
     return (
       <>
-        <h1>Algorithms available</h1>
+        <div className="home_header">Visualize algorithms for a better understanding</div>
 
         <ul>
           <li>
             <Link to='/towerOfHanoi'>Tower of Hanoi</Link>
+          </li>
+          <li>
+            <Link to='/FCFS'>First Come First Serve</Link>
           </li>
         </ul>
       </>
