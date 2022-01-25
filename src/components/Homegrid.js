@@ -7,8 +7,8 @@ function Homegrid()
     return (
       <>
         <div className='homegrid'>
-          {Homegriddata.map((item) => {
-            return <Homecard obj={item} />
+          {Homegriddata.map((item,index) => {
+            return <Homecard obj={item} key={index} />
           })}
         </div>
       </>

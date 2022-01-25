@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import Homecard from './components/Homecard'
 import Homegrid from "./components/Homegrid";
+import './Homepage.css'
 function Homepage()
 {
     return (

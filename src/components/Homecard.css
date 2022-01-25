@@ -110,11 +110,12 @@ hr {
   line-height: 18px;
 }
 .card-info {
-  width: 100%;
+  width: 85%;
+  
   position: absolute;
   color: black;
   font-family: 'Droid Serif', serif;
-  font-style: 16px;
+  font-style: 10px;
   line-height: 24px;
   top: 150px;
   z-index: 20;
