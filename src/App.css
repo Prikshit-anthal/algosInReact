@@ -1,5 +1,6 @@
 body{
     background-color: #f7f7f7;
+    margin: 0px;
 }
 .site-footer
 {
@@ -78,10 +79,7 @@ body{
 
 @media (max-width:767px)
 {
-  .site-footer
-  {
-    padding-bottom:0
-  }
+  
   .site-footer .copyright-text,.site-footer .social-icons
   {
     text-align:center
@@ -170,3 +168,32 @@ text-align: center;
 hr{
     max-width: 100px;
 }
+/* a{
+    text-decoration: none;
+} */
+.site-footer .row{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.About{
+   width: 50%;
+}
+@media (max-width:600px)
+{
+    .site-footer .row
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+    .About{
+   width: 80%;
+}
+.About h6{
+    text-align: center;
+}
+}
+.site-footer
+  {
+    padding-bottom:5px
+  }

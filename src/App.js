@@ -22,7 +22,7 @@ function App() {
         <footer className='site-footer'>
           <div className='container'>
             <div className='row'>
-              <div className='col-sm-12 col-md-6 left_me'>
+              <div className='About'>
                 <h6>About</h6>
                 <p className='text-justify'>
                   We will help programmers build up concepts in different
@@ -31,7 +31,6 @@ function App() {
                 </p>
               </div>
 
-             
               <div className='col-sm-12 col-md-6 left_me'>
                 <h6>Contact me</h6>
                 <div className=' row-sm-6 row-xs-12'>
@@ -62,7 +61,7 @@ function App() {
             </div>
             <hr />
           </div>
-          <div className='container'>
+          <div className='container  copyright'>
             <div className='row' style={{ justifyContent: 'center' }}>
               <div className='col-md-8 col-sm-6 col-xs-12'>
                 <p className='copyright-text'>
@@ -70,7 +69,6 @@ function App() {
                   <a href='#'> Prikshit</a>.
                 </p>
               </div>
-       
             </div>
           </div>
         </footer>
