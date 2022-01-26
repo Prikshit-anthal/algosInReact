@@ -3,7 +3,7 @@ export const Homegriddata = [
     
     src: 'https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024__480.jpg',
     title: 'DOGGO',
-    link: '/sorting',
+    link: '/sortingalgo',
     subtitle: 'ok i am doggo',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est earum nulla, repudiandae saepe quia explicabo officia numquam, quas tempore quam ',
   },
