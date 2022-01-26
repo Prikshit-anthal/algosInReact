@@ -1,5 +1,6 @@
 .sorting_nav{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background-color: #737373;
 }
@@ -13,6 +14,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+ 
+}
+.sorting_container button{
+    background-color: black;
+    color: white;
+    border-radius: 5%;
+    height: 40px;
 }
 .rangeVertical{
     border: 1px solid black;
@@ -23,17 +31,13 @@
     flex-direction: column;
      width: 60px;
     height: 140px;
-}
-.impleft{
-    right: -20px;
-}
-.impright{
-    left: -20px;
+    background-color: #737373;
+    overflow: hidden;
 }
 .rangeVertical input{
     flex-grow: 1;
     width: 100px;
- 
+   
    
 }
 .rangeVertical div{
@@ -44,4 +48,29 @@
     height: 100%;
     text-align: center;
     background-color:rgb(233, 233, 240) ;
+}
+.toggle{
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 13px;
+    padding: 0px;
+    border-radius: 30px;
+        
+       
+            
+}
+.toggleHelper{
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: #1a75ff;
+    top: -2px;
+    transition: all 0.5s;
+}
+.toggle input{
+        display: none;
 }
