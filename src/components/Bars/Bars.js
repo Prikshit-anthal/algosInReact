@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Bars.css'
 
-function Bars({compare,swap,sorted,arr})
+function Bars({compare,swap,shuffle,sorted,arr})
 {
 
     const width=80/arr.length;
@@ -13,7 +13,7 @@ return(<>
     {
         arr.map((val,i)=>{
             let bg = 'black'
-
+            console.log(compare);
             // i th element is being compared with some other element
             if (compare && (i === compare[0] || i === compare[1])) {
               bg = '#ffff50'
@@ -27,7 +27,8 @@ return(<>
             if (sorted && sorted.includes(i)) {
               bg = '#4bc52e'
             }
-
+            if(shuffle==true)
+            bg='black';
             const style = {
               backgroundColor: bg,
               width: `${width}vw`,

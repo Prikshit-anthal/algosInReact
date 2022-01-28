@@ -13,6 +13,7 @@ function Sortingalgo() {
   const [swap, setSwap] = useState([])
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus,setSortStatus]=useState(false);
+  const [didShuffle,setDidShuffle]=useState(false);
   //const [sortSpeed,setSortSpeed]=useState(500);
     const speed = 50;
 
@@ -33,6 +34,7 @@ function Sortingalgo() {
       }
       // console.log(temp);
       setrandArr(temp)
+      setDidShuffle(true)
     })
   }
   setarr();
@@ -83,7 +85,7 @@ useEffect(()=>{
   }
 },[sortStatus])
 
-const timerRef = useRef(null)
+
 
 // useEffect(()=>{
 // clearTimeout(timerRef.current);
@@ -100,6 +102,7 @@ const handleSort = () => {
 
 
  async function sortAccOrder(order){
+   setDidShuffle(false)
    for(var idx=0;idx<order.length;idx++)
    { //console.log('speed ' + countRef.current)
    function tooth (){
@@ -130,6 +133,8 @@ const handleSort = () => {
  await tooth();
    }
    setSortStatus(false);
+         
+         
   
  }
 
@@ -227,6 +232,7 @@ const handleSort = () => {
               compare={sortStatus && compare}
               swap={sortStatus && swap}
               sorted={sortedIndex}
+              shuffle={didShuffle}
             />
           </div>
           <label className='rangeVertical'>
