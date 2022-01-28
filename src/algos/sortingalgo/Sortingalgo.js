@@ -15,16 +15,19 @@ function Sortingalgo() {
   const [sortStatus,setSortStatus]=useState(false);
   const [didShuffle,setDidShuffle]=useState(false);
   //const [sortSpeed,setSortSpeed]=useState(500);
-    const speed = 50;
+
 
   useEffect(() => { 
+
+        
+
     function getRandomInt(min, max) {
       min = Math.ceil(min)
       max = Math.floor(max)
       return Math.floor(Math.random() * (max - min + 1)) + min
     }
     var shuf_but=document.getElementsByClassName('shuffle_sort')[0];
-    shuf_but.addEventListener('click', () => {setarr()});
+    shuf_but.addEventListener('click', setarr);
 
     function setarr(){
     setrandArr((arr) => {
@@ -39,10 +42,8 @@ function Sortingalgo() {
   }
   setarr();
     // returned function will be called on component unmount
-    return () => {
-      shuf_but.removeEventListener('click', () => {
-        setarr();
-      });
+    return function cleanupListener() {
+      shuf_but.removeEventListener('click', setarr)
     }
   }, [value2range, valuerange])
 

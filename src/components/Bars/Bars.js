@@ -6,14 +6,15 @@ function Bars({compare,swap,shuffle,sorted,arr})
 
     const width=80/arr.length;
     const height=70/100;
-
+console.log(compare)
 
 return(<>
 <div className="bars_container">
     {
+     
         arr.map((val,i)=>{
             let bg = 'black'
-            console.log(compare);
+            
             // i th element is being compared with some other element
             if (compare && (i === compare[0] || i === compare[1])) {
               bg = '#ffff50'
