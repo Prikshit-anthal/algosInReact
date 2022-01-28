@@ -1,0 +1,8 @@
+.bars_container{
+display: flex;
+justify-content: space-evenly;
+
+}
+.bar_item{
+    background-color: black;
+}
