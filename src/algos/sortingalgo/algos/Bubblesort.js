@@ -1,3 +1,5 @@
+// const { performance } = require('perf_hooks');
+
 const swap = (arr, i, j) => {
   const temp = arr[i]
   arr[i] = arr[j]
@@ -10,18 +12,27 @@ const bubbleSort = (blocks) => {
 
   let i, j
 
+ 
+
+  var startTime = performance.now()
+
   for (i = 0; i < dupBlocks.length; i++) {
     for (j = 0; j < dupBlocks.length - i - 1; j++) {
       order.push([j, j + 1, null, null]) // Compare
       if (dupBlocks[j] > dupBlocks[j + 1]) {
         swap(dupBlocks, j, j + 1)
-        order.push([j, j + 1,dupBlocks.slice(), null]) // Swap
+        order.push([j, j + 1, dupBlocks.slice(), null]) // Swap
       }
     }
     order.push([null, null, null, j]) // j-th element is in correct position ( Sorted )
   }
 
-  return order
+  var endTime = performance.now()
+
+
+  //console.log(`Execution time: ${endTime - startTime} ms`)
+
+  return [order, endTime - startTime]
 }
 
 export default bubbleSort

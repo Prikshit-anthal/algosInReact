@@ -3,6 +3,7 @@ import './Sortingalgo.css'
 import Sorting_nav from './Sorting_nav'
 import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
+import Legends from './Legends'
 
 function Sortingalgo() {
   const [valuerange, setValuerange] = useState(30)
@@ -13,13 +14,14 @@ function Sortingalgo() {
   const [swap, setSwap] = useState([])
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus,setSortStatus]=useState(false);
-  const [didShuffle,setDidShuffle]=useState(false);
+  const [compareCount,setCompareCount]=useState(0);
+  const [swapCount, setSwapCount] = useState(0);
   //const [sortSpeed,setSortSpeed]=useState(500);
 
 
   useEffect(() => { 
 
-        
+      
 
     function getRandomInt(min, max) {
       min = Math.ceil(min)
@@ -30,6 +32,7 @@ function Sortingalgo() {
     shuf_but.addEventListener('click', setarr);
 
     function setarr(){
+      setSortedIndex([]);
     setrandArr((arr) => {
       var temp = []
       for (var i = 0; i < value2range; i++) {
@@ -37,7 +40,7 @@ function Sortingalgo() {
       }
       // console.log(temp);
       setrandArr(temp)
-      setDidShuffle(true)
+     // setDidShuffle(true)
     })
   }
   setarr();
@@ -103,7 +106,7 @@ const handleSort = () => {
 
 
  async function sortAccOrder(order){
-   setDidShuffle(false)
+  // setDidShuffle(false)
    for(var idx=0;idx<order.length;idx++)
    { //console.log('speed ' + countRef.current)
    function tooth (){
@@ -112,7 +115,13 @@ const handleSort = () => {
      setTimeout(() => {
        //console.log('hi' + idx)
        const [j, k, arr, index] = order[idx]
+
                setCompare([j, k])
+
+               setCompareCount((val)=>{
+                 return(val+1);
+               });
+
                setSwap([])
 
                if (index !== null) {
@@ -123,6 +132,10 @@ const handleSort = () => {
                  //console.log(arr)
                  setrandArr(arr)
                  if (j !== null || k != null) setSwap([j, k])
+
+                 setSwapCount((val)=>{
+                   return(val+1);
+                 })
                }
 
               
@@ -178,7 +191,10 @@ const handleSort = () => {
   setSortStatus(true)
  // console.log((100 * 100) / sortSpeed)
   //console.log(randArr)
-  sortAccOrder(bubbleSort(randArr))
+  var op = bubbleSort(randArr);
+  sortAccOrder(op[0]);
+  console.log(op[1]);
+ 
   // algo === 'bubbleSort'
   //   ? sortAccOrder(bubbleSort(blocks))
   //   : algo === 'insertionSort'
@@ -233,8 +249,15 @@ const handleSort = () => {
               compare={sortStatus && compare}
               swap={sortStatus && swap}
               sorted={sortedIndex}
-              shuffle={didShuffle}
+              // shuffle={didShuffle}
             />
+            
+            <Legends/>
+
+
+           <div>{swapCount}</div>
+           <div>{compareCount}</div>
+
           </div>
           <label className='rangeVertical'>
             Num

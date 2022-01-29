@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './Bars.css'
 
-function Bars({compare,swap,shuffle,sorted,arr})
+function Bars({compare,swap,sorted,arr})
 {
 
     const width=80/arr.length;
     const height=70/100;
-console.log(compare)
+//console.log(compare)
 
 return(<>
 <div className="bars_container">
@@ -28,8 +28,7 @@ return(<>
             if (sorted && sorted.includes(i)) {
               bg = '#4bc52e'
             }
-            if(shuffle==true)
-            bg='black';
+            
             const style = {
               backgroundColor: bg,
               width: `${width}vw`,

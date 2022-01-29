@@ -1,0 +1,29 @@
+.legendContainer
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.legendItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#yellow{
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+}
+#green{
+    width: 20px;
+    height: 20px;
+    background-color:green;
+}
+
+#red{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
