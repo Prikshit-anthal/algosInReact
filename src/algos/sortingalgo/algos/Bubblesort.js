@@ -12,10 +12,8 @@ const bubbleSort = (blocks) => {
 
   let i, j
 
+
  
-
-  var startTime = performance.now()
-
   for (i = 0; i < dupBlocks.length; i++) {
     for (j = 0; j < dupBlocks.length - i - 1; j++) {
       order.push([j, j + 1, null, null]) // Compare
@@ -27,12 +25,14 @@ const bubbleSort = (blocks) => {
     order.push([null, null, null, j]) // j-th element is in correct position ( Sorted )
   }
 
-  var endTime = performance.now()
+
+  
 
 
-  //console.log(`Execution time: ${endTime - startTime} ms`)
 
-  return [order, endTime - startTime]
+ 
+
+  return order
 }
 
 export default bubbleSort

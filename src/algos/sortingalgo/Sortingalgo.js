@@ -19,7 +19,7 @@ function Sortingalgo() {
   
   //sort stat results array
   const [resultsArr, setResultsArr] = useState([
-    { sort: '', comparison: 0, swap: 0, cpu: 0, vis: 0 },
+    { sort: '', comparison: 0, swap: 0, vis: 0 },
   ])
 
   //getting random array 
@@ -79,14 +79,13 @@ function Sortingalgo() {
     //so speed can be changed
     async function sortAccOrder(op) {
       //getting order arr which contains sort info
-      var order = op[0]
+      var order = op;
 
       //creating temporary obj to copy at last in resultsArr
       var tempo = {
         sort: 'Bubble',
         comparison: 0,
         swap: 0,
-        cpu: 0,
         vis: 0,
       }
 
@@ -129,7 +128,6 @@ function Sortingalgo() {
         //storing data in tempo obj
         vis_time += endTime - startTime
         tempo.vis = vis_time
-        tempo.cpu = op[1]
       }
 
       //appending results arr with tempo
@@ -146,7 +144,7 @@ function Sortingalgo() {
 
     //calling sort
     var op = bubbleSort(randArr)
-    console.log(op[1]+" ms");
+    // console.log(op[1]+" ms");
     sortAccOrder(op)
 
     // algo === 'bubbleSort'
@@ -218,20 +216,19 @@ function Sortingalgo() {
                   <th>Sort used</th>
                   <th>Comparisons done</th>
                   <th>Swaps done</th>
-                  <th>CPU time</th>
                   <th>Visualise Time</th>
                 </tr>
               </thead>
               {/* mapping resultsArr for showing results */}
               <tbody id='resultsOfAlgos'>
                 {resultsArr.map((val, index) => {
+                 if(index!=0)
                   return (
                     <tr key={index}>
                       <td>{index}</td>
                       <td>{val.sort}</td>
                       <td>{val.comparison}</td>
                       <td>{val.swap}</td>
-                      <td>{val.cpu}ms</td>
                       <td>{val.vis / 1000}s</td>
                     </tr>
                   )
