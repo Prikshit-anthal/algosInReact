@@ -6,6 +6,7 @@ function Bars({compare,swap,sorted,arr})
 
     const width=80/arr.length;
     const height=70/100;
+    
 //console.log(compare)
 
 return(<>
@@ -13,6 +14,7 @@ return(<>
     {
      
         arr.map((val,i)=>{
+            
             let bg = 'black'
             
             // i th element is being compared with some other element
