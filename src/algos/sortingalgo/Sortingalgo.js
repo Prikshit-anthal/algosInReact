@@ -114,9 +114,9 @@ function Sortingalgo() {
 
                 tempo.swap++
               }
-            }, (100 * 100) / countRef.current)//dynamic changing of speed
+            }, (100 * 40) / countRef.current)//dynamic changing of speed
 
-            setTimeout(resolve, (100 * 100) / countRef.current)//returning promise
+            setTimeout(resolve, (100 * 40) / countRef.current)//returning promise
           })
         }
         //performance.now() to get visualiser time took
@@ -172,6 +172,9 @@ function Sortingalgo() {
             valuerange: valuerange,
             setValuerange: setValuerange,
             handleSort: handleSort,
+            randArr: randArr,
+            setrandArr: setrandArr,
+            setSortedIndex:setSortedIndex,
           }}
         />
         <div className='sortingrangearea'>
@@ -208,7 +211,7 @@ function Sortingalgo() {
             {/*For representation of colours in bars  */}
             <Legends />
 
-           {/* results shown of sort i table */}
+            {/* results shown of sort i table */}
             <table style={{ width: '100%' }}>
               <thead>
                 <tr>
@@ -222,16 +225,16 @@ function Sortingalgo() {
               {/* mapping resultsArr for showing results */}
               <tbody id='resultsOfAlgos'>
                 {resultsArr.map((val, index) => {
-                 if(index!=0)
-                  return (
-                    <tr key={index}>
-                      <td>{index}</td>
-                      <td>{val.sort}</td>
-                      <td>{val.comparison}</td>
-                      <td>{val.swap}</td>
-                      <td>{val.vis / 1000}s</td>
-                    </tr>
-                  )
+                  if (index != 0)
+                    return (
+                      <tr key={index}>
+                        <td>{index}</td>
+                        <td>{val.sort}</td>
+                        <td>{val.comparison}</td>
+                        <td>{val.swap}</td>
+                        <td>{val.vis / 1000}s</td>
+                      </tr>
+                    )
                 })}
               </tbody>
             </table>

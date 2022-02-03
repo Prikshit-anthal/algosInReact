@@ -1,9 +1,61 @@
-import React from "react";
+import React, { useEffect,useRef } from "react";
 
 function Nav(props)
 {
-     const { valuerange, setValuerange, handleSort } = props.obj
-    
+     const {
+       valuerange,
+       setValuerange,
+       handleSort,
+       randArr,
+       setrandArr,
+       setSortedIndex,
+     } = props.obj
+
+     const arrInputREf=useRef(null);
+     useEffect(()=>{
+      arrInputREf.current.setAttribute('onkeypress', 'return /^[0-9,\b]+$/i.test(event.key)');
+      arrInputREf.current.setAttribute('onpaste', 'return false;')
+     })
+
+
+     const setInputArr=()=>{
+    //  console.log('hi')
+    setSortedIndex([]);
+    let initIndex=0
+    let commaIdx=arrInputREf.current.value.indexOf(',', 0);
+   // console.log(commaIdx)
+    var arr=[];
+    while(commaIdx!=-1)
+    {
+
+       arr.push(Number(String(arrInputREf.current.value).substring(initIndex,commaIdx)));
+       initIndex=commaIdx+1;
+       commaIdx = arrInputREf.current.value.indexOf(',',initIndex);
+
+    }
+    arr.push(Number(
+      String(arrInputREf.current.value).substring(
+        initIndex,
+        arrInputREf.current.value.length
+      )
+    ))
+    if(arr.length>100)
+    {
+      alert('Max array length:100');
+      return;
+    }
+    for(var i=0;i<arr.length;i++)
+    {
+      if(arr[i]>100||arr[i]==0)
+      {
+        alert('array range:[0,100] input syntax:[val1,val2]');
+        return
+      }
+    }
+    //console.log(arr);
+    setrandArr(arr);
+
+     }
    return (
      <>
        <div className='sorting_nav'>
@@ -40,39 +92,17 @@ function Nav(props)
            </div>
          </div>
          <div style={{ display: 'flex', flexDirection: 'column' }}>
-           Compare
-           <div
-             className='toggle'
-             //   onclick='fn(this)'
-             style={{ backgroundColor: 'white', border: '2px solid white' }}
-           >
-             <label
-               className='toggleHelper'
-               // onclick='fn1(this)'
-               style={{ left: '-5px' }}
-             >
-               <input
-                 type='checkbox'
-                 onClick={(e) => {
-                   e.target.parentNode.click()
-
-                   if (e.target.parentNode.style.left == '-5px') {
-                     e.target.parentNode.style = 'left:15px'
-                   } else {
-                     e.target.parentNode.style = 'left:-5px'
-                   }
-                   //console.log(e.target.checked)
-                   e.target.checked == true
-                     ? (e.target.parentNode.parentNode.style =
-                         '    background-color: rgb(111, 217, 243);border: 2px solid rgb(111, 217, 243);')
-                     : (e.target.parentNode.parentNode.style =
-                         '    background-color: white;border: 2px solid white;')
-                 }}
-               />
-             </label>
-           </div>
+           Enter Array
+           <input
+             type='text'
+             ref={arrInputREf}
+             style={{overflow:"scroll"}}
+           />
+           <button onClick={setInputArr}>Set Arr</button>
          </div>
-         <button className='sort_visualise' onClick={handleSort}>
+         <button className='sort_visualise' onClick={()=>{
+           setSortedIndex([]);
+           handleSort()}}>
            Visualise
          </button>
        </div>
