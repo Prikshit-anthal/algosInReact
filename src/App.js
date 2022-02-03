@@ -17,13 +17,13 @@ function App() {
       <Nav />
       <Router>
         <Routes>
-          <Route path='/' element={<Homepage />} />
+          <Route path='/algosInReact.git' element={<Homepage />} />
           <Route path='/towerOfHanoi' element={<TowerOfHanoi />} />
           <Route path='/FCFS' element={<FCFS />} />
-          <Route path='/sortingalgo' element={<Sortingalgo/>}/>
+          <Route path='/sortingalgo' element={<Sortingalgo />} />
         </Routes>
       </Router>
-      <Footer/>
+      <Footer />
     </>
   )
 }
