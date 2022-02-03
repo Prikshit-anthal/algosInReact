@@ -9,9 +9,10 @@ function Nav(props)
        randArr,
        setrandArr,
        setSortedIndex,
+       arrInputREf,
      } = props.obj
 
-     const arrInputREf=useRef(null);
+     
      useEffect(()=>{
       arrInputREf.current.setAttribute('onkeypress', 'return /^[0-9,\b]+$/i.test(event.key)');
       arrInputREf.current.setAttribute('onpaste', 'return false;')
@@ -91,18 +92,15 @@ function Nav(props)
              </select>
            </div>
          </div>
-         <div style={{ display: 'flex', flexDirection: 'column' }}>
-           Enter Array
-           <input
-             type='text'
-             ref={arrInputREf}
-             style={{overflow:"scroll"}}
-           />
-           <button onClick={setInputArr}>Set Arr</button>
-         </div>
-         <button className='sort_visualise' onClick={()=>{
-           setSortedIndex([]);
-           handleSort()}}>
+
+
+         <button
+           className='sort_visualise'
+           onClick={() => {
+             setSortedIndex([])
+             handleSort()
+           }}
+         >
            Visualise
          </button>
        </div>

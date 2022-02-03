@@ -4,7 +4,7 @@ import './Bars.css'
 function Bars({compare,swap,sorted,arr})
 {
 
-    const width=80/arr.length;
+    const width=70/arr.length;
     const height=70/100;
     
 //console.log(compare)
@@ -34,6 +34,7 @@ return(<>
             const style = {
               backgroundColor: bg,
               width: `${width}vw`,
+              // width:'10px',
               height: `${height * val}vh`,
             }
             //console.log(index);

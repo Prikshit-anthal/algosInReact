@@ -9,21 +9,59 @@ import Legends from './Legends'
 
 function Sortingalgo() {
   // All useStates
-  const [valuerange, setValuerange] = useState(30)
-  const [sortSpeed, setSortSpeed] = useState(30)
-  const [value2range, setValue2range] = useState(30)
+  const [valuerange, setValuerange] = useState(80)
+  const [sortSpeed, setSortSpeed] = useState(50)
+  const [value2range, setValue2range] = useState(20)
   const [randArr, setrandArr] = useState([])
   const [compare, setCompare] = useState([])
   const [swap, setSwap] = useState([])
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus, setSortStatus] = useState(false)
+  const arrInputREf = useRef(null)
 
   //sort stat results array
   const [resultsArr, setResultsArr] = useState([
     { sort: '', comparison: 0, swap: 0, vis: 0,arr:[] },
   ])
 
-    
+      const setInputArr=()=>{
+    //  console.log('hi')
+    setSortedIndex([]);
+    let initIndex=0
+    let commaIdx=arrInputREf.current.value.indexOf(',', 0);
+   // console.log(commaIdx)
+    var arr=[];
+    while(commaIdx!=-1)
+    {
+
+       arr.push(Number(String(arrInputREf.current.value).substring(initIndex,commaIdx)));
+       initIndex=commaIdx+1;
+       commaIdx = arrInputREf.current.value.indexOf(',',initIndex);
+
+    }
+    arr.push(Number(
+      String(arrInputREf.current.value).substring(
+        initIndex,
+        arrInputREf.current.value.length
+      )
+    ))
+    if(arr.length>100)
+    {
+      alert('Max array length:100');
+      return;
+    }
+    for(var i=0;i<arr.length;i++)
+    {
+      if(arr[i]>100||arr[i]==0)
+      {
+        alert('array range:[0,100] input syntax:[val1,val2]');
+        return
+      }
+    }
+    //console.log(arr);
+    setrandArr(arr);
+
+     }
 
 
   //getting random array 
@@ -193,11 +231,34 @@ function Sortingalgo() {
             handleSort: handleSort,
             randArr: randArr,
             setrandArr: setrandArr,
-            setSortedIndex:setSortedIndex,
+            setSortedIndex: setSortedIndex,
+            arrInputREf: arrInputREf,
           }}
         />
+
         <div className='sortingrangearea'>
           {/* left align speed bar */}
+
+          <label className='addArray'>
+            hi++
+            <label>
+              {' '}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                Enter Array
+                <div style={{ display: 'flex', height: '20px' }}>
+                  <input
+                    type='text'
+                    ref={arrInputREf}
+                    style={{ width: '100px' }}
+                  />
+                  <button onClick={setInputArr} style={{ height: '20px' }}>
+                    Set Arr
+                  </button>
+                </div>
+              </div>
+            </label>
+          </label>
+
           <label className='rangeVertical'>
             <div>Speed</div>
 
@@ -228,71 +289,77 @@ function Sortingalgo() {
             />
 
             {/*For representation of colours in bars  */}
+            <br />
             <Legends />
+            <br />
 
             {/* results shown of sort i table */}
-            <table style={{ width: '100%' }}>
-              <thead>
-                <tr>
-                  <th>S.no</th>
-                  <th>Sort used</th>
-                  <th>Array used</th>
-                  <th>Array result</th>
-                  <th>Comparisons done</th>
-                  <th>Swaps done</th>
-                  <th>Visualise Time</th>
-                </tr>
-              </thead>
-              {/* mapping resultsArr for showing results */}
-              <tbody id='resultsOfAlgos'>
-                {resultsArr.map((val, index) => {
-                  if (index != 0)
-                    return (
-                      <tr key={index}>
-                        <td>{index}</td>
-                        <td>{val.sort}</td>
-                        <td>
-                          {val.arr.map((item, indx) => {
-                            // console.log('arr '+item+' '+val.arr);
-                            data += String(item) + ','
-                            if (indx == val.arr.length - 1) {
-                              let i = data
-                              data = ''
-                              return (
-                                <input
-                                key={indx}
-                                  defaultValue={i.substring(0, i.length - 1)}
-                                  disabled
-                                ></input>
-                              )
-                            }
-                          })}
-                        </td>
-                        <td>
-                          {resARrrr.map((item, indx) => {
-                            // console.log('arr '+item+' '+val.arr);
-                            data += String(item) + ','
-                            if (indx == val.arr.length - 1) {
-                              let i = data
-                              data = ''
-                              return (
-                                <input
-                                key={indx}
-                                  defaultValue={i.substring(0, i.length - 1)}
-                                  disabled
-                                ></input>
-                              )
-                            }
-                          })}
-                        </td>
-                        <td>{val.comparison}</td>
-                        <td>{val.swap}</td>
-                        <td>{val.vis / 1000}s</td>
-                      </tr>
-                    )
-                })}
-              </tbody>
-            </table>
+            <div style={{ overflow: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr>
+                    <th>S.no</th>
+                    <th>Sort used</th>
+                    <th className='mightVanish'>Array used</th>
+                    <th className='mightVanish'>Array result</th>
+                    <th>Comparisons done</th>
+                    <th>Swaps done</th>
+                    <th>Visualise Time</th>
+                  </tr>
+                </thead>
+                {/* mapping resultsArr for showing results */}
+                <tbody id='resultsOfAlgos'>
+                  {resultsArr.map((val, index) => {
+                    if (index != 0)
+                      return (
+                        <tr key={index}>
+                          <td>{index}</td>
+                          <td>{val.sort}</td>
+                          <td className='mightVanish'>
+                            {val.arr.map((item, indx) => {
+                              // console.log('arr '+item+' '+val.arr);
+                              data += String(item) + ','
+                              if (indx == val.arr.length - 1) {
+                                let i = data
+                                data = ''
+                                return (
+                                  <input
+                                    key={indx}
+                                    defaultValue={i.substring(0, i.length - 1)}
+                                    style={{ width: '60px' }}
+                                    disabled
+                                  ></input>
+                                )
+                              }
+                            })}
+                          </td>
+                          <td className='mightVanish'>
+                            {resARrrr.map((item, indx) => {
+                              // console.log('arr '+item+' '+val.arr);
+                              data += String(item) + ','
+                              if (indx == val.arr.length - 1) {
+                                let i = data
+                                data = ''
+                                return (
+                                  <input
+                                    key={indx}
+                                    defaultValue={i.substring(0, i.length - 1)}
+                                    style={{ width: '60px' }}
+                                    disabled
+                                  ></input>
+                                )
+                              }
+                            })}
+                          </td>
+                          <td>{val.comparison}</td>
+                          <td>{val.swap}</td>
+                          <td>{(val.vis / 1000).toFixed(2)}s</td>
+                        </tr>
+                      )
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
           {/* right align num bar */}
           <label className='rangeVertical'>

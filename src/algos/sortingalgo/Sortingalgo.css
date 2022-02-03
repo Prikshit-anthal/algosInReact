@@ -10,11 +10,18 @@
     text-align: center;
 }
 .sortingrangearea{
-    height: 85vh;
+    /* height: 85vh; */
+    position:relative;
+    height:100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
  
+}
+.addArray{
+    position:absolute;
+    top:0;
+    left:0;
 }
 .sorting_container button{
     background-color: black;
@@ -29,7 +36,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-     width: 6vw;
+     width: 50px;
     height: 140px;
     background-color: #737373;
     overflow: hidden;
@@ -73,4 +80,39 @@
 }
 .toggle input{
         display: none;
+}
+@media only screen and (max-width: 500px) {
+.rangeVertical input{
+    width:70px;
+}
+.rangeVertical{
+    height:110px;
+}
+#imRange{
+    width:70px;
+}
+}
+@media only screen and (max-width: 550px) {
+
+table .mightVanish{
+
+        display:none;
+     
+    
+}
+}
+
+@media only screen and (max-width: 350px) {
+table th{
+    font-size:0.8rem;
+}
+table td{
+    font-size:0.7rem;
+}
+
+}
+@media only screen and (max-width: 410px) {
+.rangeVertical{
+    font-size:0.8rem;
+}
 }
