@@ -17,7 +17,7 @@ function App() {
       <Nav />
       <Router>
         <Routes>
-          <Route path='/algosInReact.git' element={<Homepage />} />
+          <Route path={ process.env.PUBLIC_URL + '/'} element={<Homepage />} />
           <Route path='/towerOfHanoi' element={<TowerOfHanoi />} />
           <Route path='/FCFS' element={<FCFS />} />
           <Route path='/sortingalgo' element={<Sortingalgo />} />
