@@ -6,6 +6,7 @@ import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
 import Legends from './Legends'
 
+
 function Sortingalgo() {
   // All useStates
   const [valuerange, setValuerange] = useState(30)
@@ -16,11 +17,14 @@ function Sortingalgo() {
   const [swap, setSwap] = useState([])
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus, setSortStatus] = useState(false)
-  
+
   //sort stat results array
   const [resultsArr, setResultsArr] = useState([
-    { sort: '', comparison: 0, swap: 0, vis: 0 },
+    { sort: '', comparison: 0, swap: 0, vis: 0,arr:[] },
   ])
+
+    
+
 
   //getting random array 
   useEffect(() => {
@@ -72,12 +76,15 @@ function Sortingalgo() {
 
   //working fn which calls sort and extract infor from returned array
   const handleSort = () => {
+
+    data = '';
     //visibility time of sorting going on
     var vis_time = 0
 
     //async fn and promise used to change setTimeout time intervals
     //so speed can be changed
     async function sortAccOrder(op) {
+        
       //getting order arr which contains sort info
       var order = op;
 
@@ -87,11 +94,13 @@ function Sortingalgo() {
         comparison: 0,
         swap: 0,
         vis: 0,
+        arr:[],
       }
 
       //looping order array with promise to avoid skipping 
       for (var idx = 0; idx < order.length; idx++) {
         function tooth() {
+          
           return new Promise((resolve) => {
             setTimeout(() => {
               //console.log('hi' + idx)
@@ -109,6 +118,7 @@ function Sortingalgo() {
 
               if (arr) {
                 //console.log(arr)
+                tempo.arr = arr.slice();
                 setrandArr(arr)
                 if (j !== null || k != null) setSwap([j, k])
 
@@ -128,10 +138,15 @@ function Sortingalgo() {
         //storing data in tempo obj
         vis_time += endTime - startTime
         tempo.vis = vis_time
+
+
       }
+            
+              tempo.arr = randArr.slice();
 
       //appending results arr with tempo
       let updateUsers = [...resultsArr, tempo]
+      
 
       setResultsArr(updateUsers)
 
@@ -162,7 +177,11 @@ function Sortingalgo() {
     //       setCompleted(true)
     //     })()
   }
-
+    var data = ''
+    var resARrrr=[];
+    if(randArr)
+    resARrrr=randArr
+    
   return (
     <>
       <div className='sorting_container'>
@@ -217,6 +236,8 @@ function Sortingalgo() {
                 <tr>
                   <th>S.no</th>
                   <th>Sort used</th>
+                  <th>Array used</th>
+                  <th>Array result</th>
                   <th>Comparisons done</th>
                   <th>Swaps done</th>
                   <th>Visualise Time</th>
@@ -230,6 +251,40 @@ function Sortingalgo() {
                       <tr key={index}>
                         <td>{index}</td>
                         <td>{val.sort}</td>
+                        <td>
+                          {val.arr.map((item, indx) => {
+                            // console.log('arr '+item+' '+val.arr);
+                            data += String(item) + ','
+                            if (indx == val.arr.length - 1) {
+                              let i = data
+                              data = ''
+                              return (
+                                <input
+                                key={indx}
+                                  defaultValue={i.substring(0, i.length - 1)}
+                                  disabled
+                                ></input>
+                              )
+                            }
+                          })}
+                        </td>
+                        <td>
+                          {resARrrr.map((item, indx) => {
+                            // console.log('arr '+item+' '+val.arr);
+                            data += String(item) + ','
+                            if (indx == val.arr.length - 1) {
+                              let i = data
+                              data = ''
+                              return (
+                                <input
+                                key={indx}
+                                  defaultValue={i.substring(0, i.length - 1)}
+                                  disabled
+                                ></input>
+                              )
+                            }
+                          })}
+                        </td>
                         <td>{val.comparison}</td>
                         <td>{val.swap}</td>
                         <td>{val.vis / 1000}s</td>
