@@ -1,4 +1,5 @@
 import React, { useEffect,useRef } from "react";
+import { Table,Slider, Input, Button } from 'antd'
 
 function Nav(props)
 {
@@ -6,65 +7,25 @@ function Nav(props)
        valuerange,
        setValuerange,
        handleSort,
-       randArr,
-       setrandArr,
+
        setSortedIndex,
-       arrInputREf,
+       
      } = props.obj
 
      
-     useEffect(()=>{
-      arrInputREf.current.setAttribute('onkeypress', 'return /^[0-9,\b]+$/i.test(event.key)');
-      arrInputREf.current.setAttribute('onpaste', 'return false;')
-     })
 
 
-     const setInputArr=()=>{
-    //  console.log('hi')
-    setSortedIndex([]);
-    let initIndex=0
-    let commaIdx=arrInputREf.current.value.indexOf(',', 0);
-   // console.log(commaIdx)
-    var arr=[];
-    while(commaIdx!=-1)
-    {
 
-       arr.push(Number(String(arrInputREf.current.value).substring(initIndex,commaIdx)));
-       initIndex=commaIdx+1;
-       commaIdx = arrInputREf.current.value.indexOf(',',initIndex);
-
-    }
-    arr.push(Number(
-      String(arrInputREf.current.value).substring(
-        initIndex,
-        arrInputREf.current.value.length
-      )
-    ))
-    if(arr.length>100)
-    {
-      alert('Max array length:100');
-      return;
-    }
-    for(var i=0;i<arr.length;i++)
-    {
-      if(arr[i]>100||arr[i]==0)
-      {
-        alert('array range:[0,100] input syntax:[val1,val2]');
-        return
-      }
-    }
-    //console.log(arr);
-    setrandArr(arr);
-
-     }
    return (
      <>
-       <div className='sorting_nav'>
-         <button className='shuffle_sort'>Shuffle</button>
+       <div className='sorting_nav flex justify-between items-center bg-teal-600'>
+         <Button type='primary' className='shuffle_sort'>
+           Shuffle
+         </Button>
          <div className='value_range'>
-           <label className='rangeType'>
+           <label className='rangeType flex flex-col text-center'>
              Val range
-             <input
+             <Input
                type='range'
                id='imRange'
                onChange={(e) => {
@@ -77,7 +38,13 @@ function Nav(props)
                // value={len}
                defaultValue={valuerange}
                // onInput={setValuerange(0)}
-             ></input>
+             ></Input>
+             <Slider
+               min={5}
+               max={100}
+              //  onChange={this.onChange}
+              //  value={typeof inputValue === 'number' ? inputValue : 0}
+             />
            </label>
            <div>{valuerange}</div>
          </div>
@@ -93,8 +60,8 @@ function Nav(props)
            </div>
          </div>
 
-
-         <button
+         <Button
+           type='primary'
            className='sort_visualise'
            onClick={() => {
              setSortedIndex([])
@@ -102,7 +69,7 @@ function Nav(props)
            }}
          >
            Visualise
-         </button>
+         </Button>
        </div>
      </>
    )

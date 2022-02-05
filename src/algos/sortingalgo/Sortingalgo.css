@@ -1,34 +1,20 @@
-.sorting_nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #737373;
-}
-.rangeType{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-.sortingrangearea{
-    /* height: 85vh; */
+
+/* .sortingrangearea{
+    height: 85vh;
     position:relative;
     height:100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
  
-}
-.addArray{
+} */
+/* .addArray{
     position:absolute;
     top:0;
     left:0;
-}
-.sorting_container button{
+} */
+/* .sorting_container Button{
     background-color: black;
     color: white;
     border-radius: 5%;
-    height: 40px;
-}
+} */
 .rangeVertical{
     border: 1px solid black;
     border-radius: 1%;

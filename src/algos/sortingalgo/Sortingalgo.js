@@ -5,7 +5,8 @@ import Sorting_nav from './Sorting_nav'
 import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
 import Legends from './Legends'
-
+import { Table, Input, Button } from 'antd'
+import { DownOutlined } from '@ant-design/icons'
 
 function Sortingalgo() {
   // All useStates
@@ -19,59 +20,63 @@ function Sortingalgo() {
   const [sortStatus, setSortStatus] = useState(false)
   const arrInputREf = useRef(null)
 
+  useEffect(() => {
+    arrInputREf.current.setAttribute(
+      'onkeypress',
+      'return /^[0-9,\b]+$/i.test(event.key)'
+    )
+    arrInputREf.current.setAttribute('onpaste', 'return false;')
+  })
+
   //sort stat results array
   const [resultsArr, setResultsArr] = useState([
-    { sort: '', comparison: 0, swap: 0, vis: 0,arr:[] },
+    { sort: '', comparison: 0, swap: 0, vis: 0, arr: [] },
   ])
 
-      const setInputArr=()=>{
+  const setInputArr = () => {
     //  console.log('hi')
-    setSortedIndex([]);
-    let initIndex=0
-    let commaIdx=arrInputREf.current.value.indexOf(',', 0);
-   // console.log(commaIdx)
-    var arr=[];
-    while(commaIdx!=-1)
-    {
-
-       arr.push(Number(String(arrInputREf.current.value).substring(initIndex,commaIdx)));
-       initIndex=commaIdx+1;
-       commaIdx = arrInputREf.current.value.indexOf(',',initIndex);
-
-    }
-    arr.push(Number(
-      String(arrInputREf.current.value).substring(
-        initIndex,
-        arrInputREf.current.value.length
+    setSortedIndex([])
+    let initIndex = 0
+    let commaIdx = arrInputREf.current.value.indexOf(',', 0)
+    // console.log(commaIdx)
+    var arr = []
+    while (commaIdx != -1) {
+      arr.push(
+        Number(String(arrInputREf.current.value).substring(initIndex, commaIdx))
       )
-    ))
-    if(arr.length>100)
-    {
-      alert('Max array length:100');
-      return;
+      initIndex = commaIdx + 1
+      commaIdx = arrInputREf.current.value.indexOf(',', initIndex)
     }
-    for(var i=0;i<arr.length;i++)
-    {
-      if(arr[i]>100||arr[i]==0)
-      {
-        alert('array range:[0,100] input syntax:[val1,val2]');
+    arr.push(
+      Number(
+        String(arrInputREf.current.value).substring(
+          initIndex,
+          arrInputREf.current.value.length
+        )
+      )
+    )
+    if (arr.length > 100) {
+      alert('Max array length:100')
+      return
+    }
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > 100 || arr[i] == 0) {
+        alert('array range:[0,100] input syntax:[val1,val2]')
         return
       }
     }
     //console.log(arr);
-    setrandArr(arr);
+    setrandArr(arr)
+  }
 
-     }
-
-
-  //getting random array 
+  //getting random array
   useEffect(() => {
     function getRandomInt(min, max) {
       min = Math.ceil(min)
       max = Math.floor(max)
       return Math.floor(Math.random() * (max - min + 1)) + min
     }
-    //event listener for shuffle button so it calls setarr fn
+    //event listener for shuffle Button so it calls setarr fn
     var shuf_but = document.getElementsByClassName('shuffle_sort')[0]
     shuf_but.addEventListener('click', setarr)
 
@@ -95,7 +100,7 @@ function Sortingalgo() {
     }
   }, [value2range, valuerange])
 
-  //disabling no using button while soting is going on
+  //disabling no using Button while soting is going on
   useEffect(() => {
     if (sortStatus == true) {
       document.getElementsByClassName('impright')[0].disabled = true
@@ -114,17 +119,15 @@ function Sortingalgo() {
 
   //working fn which calls sort and extract infor from returned array
   const handleSort = () => {
-
-    data = '';
+    data = ''
     //visibility time of sorting going on
     var vis_time = 0
 
     //async fn and promise used to change setTimeout time intervals
     //so speed can be changed
     async function sortAccOrder(op) {
-        
       //getting order arr which contains sort info
-      var order = op;
+      var order = op
 
       //creating temporary obj to copy at last in resultsArr
       var tempo = {
@@ -132,13 +135,12 @@ function Sortingalgo() {
         comparison: 0,
         swap: 0,
         vis: 0,
-        arr:[],
+        arr: [],
       }
 
-      //looping order array with promise to avoid skipping 
+      //looping order array with promise to avoid skipping
       for (var idx = 0; idx < order.length; idx++) {
         function tooth() {
-          
           return new Promise((resolve) => {
             setTimeout(() => {
               //console.log('hi' + idx)
@@ -156,15 +158,15 @@ function Sortingalgo() {
 
               if (arr) {
                 //console.log(arr)
-                tempo.arr = arr.slice();
+                tempo.arr = arr.slice()
                 setrandArr(arr)
                 if (j !== null || k != null) setSwap([j, k])
 
                 tempo.swap++
               }
-            }, (100 * 40) / countRef.current)//dynamic changing of speed
+            }, (100 * 40) / countRef.current) //dynamic changing of speed
 
-            setTimeout(resolve, (100 * 40) / countRef.current)//returning promise
+            setTimeout(resolve, (100 * 40) / countRef.current) //returning promise
           })
         }
         //performance.now() to get visualiser time took
@@ -176,23 +178,20 @@ function Sortingalgo() {
         //storing data in tempo obj
         vis_time += endTime - startTime
         tempo.vis = vis_time
-
-
       }
-            
-              tempo.arr = randArr.slice();
+
+      tempo.arr = randArr.slice()
 
       //appending results arr with tempo
       let updateUsers = [...resultsArr, tempo]
-      
 
       setResultsArr(updateUsers)
 
-      //sort Sttus false to un-disable buttons
+      //sort Sttus false to un-disable Buttons
       setSortStatus(false)
     }
 
-    //sort is starting do this to disable some buttons
+    //sort is starting do this to disable some Buttons
     setSortStatus(true)
 
     //calling sort
@@ -215,11 +214,10 @@ function Sortingalgo() {
     //       setCompleted(true)
     //     })()
   }
-    var data = ''
-    var resARrrr=[];
-    if(randArr)
-    resARrrr=randArr
-    
+  var data = ''
+  var resARrrr = []
+  if (randArr) resARrrr = randArr
+
   return (
     <>
       <div className='sorting_container'>
@@ -229,31 +227,24 @@ function Sortingalgo() {
             valuerange: valuerange,
             setValuerange: setValuerange,
             handleSort: handleSort,
-            randArr: randArr,
-            setrandArr: setrandArr,
             setSortedIndex: setSortedIndex,
-            arrInputREf: arrInputREf,
           }}
         />
 
-        <div className='sortingrangearea'>
+        <div className='sortingrangearea flex justify-between items-center relative'>
           {/* left align speed bar */}
 
-          <label className='addArray'>
-            hi++
+          <label className='addArray absolute top-0 left-0'>
+            <DownOutlined />
             <label>
               {' '}
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className='flex flex-col'>
                 Enter Array
-                <div style={{ display: 'flex', height: '20px' }}>
-                  <input
-                    type='text'
-                    ref={arrInputREf}
-                    style={{ width: '100px' }}
-                  />
-                  <button onClick={setInputArr} style={{ height: '20px' }}>
+                <div className='flex h-8'>
+                  <input type='text' ref={arrInputREf} className='w-36' />
+                  <Button type='primary'  onClick={setInputArr} className='h-8'>
                     Set Arr
-                  </button>
+                  </Button>
                 </div>
               </div>
             </label>
@@ -262,11 +253,11 @@ function Sortingalgo() {
           <label className='rangeVertical'>
             <div>Speed</div>
 
-            <input
+            <Input
               onChange={(e) => {
                 setSortSpeed(e.target.value)
               }}
-              className='impleft'
+              className='impleft mt-24'
               type='range'
               min={5}
               max={100}
@@ -323,12 +314,12 @@ function Sortingalgo() {
                                 let i = data
                                 data = ''
                                 return (
-                                  <input
+                                  <Input
                                     key={indx}
                                     defaultValue={i.substring(0, i.length - 1)}
                                     style={{ width: '60px' }}
                                     disabled
-                                  ></input>
+                                  ></Input>
                                 )
                               }
                             })}
@@ -341,12 +332,12 @@ function Sortingalgo() {
                                 let i = data
                                 data = ''
                                 return (
-                                  <input
+                                  <Input
                                     key={indx}
                                     defaultValue={i.substring(0, i.length - 1)}
                                     style={{ width: '60px' }}
                                     disabled
-                                  ></input>
+                                  ></Input>
                                 )
                               }
                             })}
@@ -364,7 +355,7 @@ function Sortingalgo() {
           {/* right align num bar */}
           <label className='rangeVertical'>
             Num
-            <input
+            <Input
               onChange={(e) => {
                 setValue2range(e.target.value)
               }}
