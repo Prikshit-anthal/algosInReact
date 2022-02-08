@@ -267,11 +267,11 @@ function Sortingalgo() {
           <label className='rangeVertical'>
             <div>Speed</div>
 
-            <Input
+            <input
               onChange={(e) => {
                 setSortSpeed(e.target.value)
               }}
-              className='impleft mt-24'
+              className='impleft'
               type='range'
               min={5}
               max={100}
@@ -320,7 +320,7 @@ function Sortingalgo() {
           {/* right align num bar */}
           <label className='rangeVertical'>
             Num
-            <Input
+            <input
               onChange={(e) => {
                 setValue2range(e.target.value)
               }}

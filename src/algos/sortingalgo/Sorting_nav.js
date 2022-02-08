@@ -26,7 +26,7 @@ function Nav(props)
          <div className='value_range'>
            <label className='rangeType flex flex-col text-center'>
              Val range
-             <Input
+             <input
                type='range'
                id='imRange'
                onChange={(e) => {
@@ -39,7 +39,7 @@ function Nav(props)
                // value={len}
                defaultValue={valuerange}
                // onInput={setValuerange(0)}
-             ></Input>
+             ></input>
            </label>
            <div>{valuerange}</div>
          </div>
