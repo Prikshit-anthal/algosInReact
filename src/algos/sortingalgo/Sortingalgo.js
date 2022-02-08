@@ -6,8 +6,8 @@ import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
 import Legends from './Legends'
 import { Table, Input, Button } from 'antd'
-import { DownOutlined } from '@ant-design/icons'
-
+import { LeftOutlined } from '@ant-design/icons'
+import {TableSyntax} from './SortConstants'
 function Sortingalgo() {
   // All useStates
   const [valuerange, setValuerange] = useState(80)
@@ -29,9 +29,7 @@ function Sortingalgo() {
   })
 
   //sort stat results array
-  const [resultsArr, setResultsArr] = useState([
-    { sort: '', comparison: 0, swap: 0, vis: 0, arr: [] },
-  ])
+  const [resultsArr, setResultsArr] = useState([])
 
   const setInputArr = () => {
     //  console.log('hi')
@@ -119,7 +117,6 @@ function Sortingalgo() {
 
   //working fn which calls sort and extract infor from returned array
   const handleSort = () => {
-    data = ''
     //visibility time of sorting going on
     var vis_time = 0
 
@@ -135,7 +132,8 @@ function Sortingalgo() {
         comparison: 0,
         swap: 0,
         vis: 0,
-        arr: [],
+        arrResult: randArr,
+        arrUsed:randArr
       }
 
       //looping order array with promise to avoid skipping
@@ -158,7 +156,8 @@ function Sortingalgo() {
 
               if (arr) {
                 //console.log(arr)
-                tempo.arr = arr.slice()
+                tempo.arrResult = arr
+
                 setrandArr(arr)
                 if (j !== null || k != null) setSwap([j, k])
 
@@ -180,7 +179,6 @@ function Sortingalgo() {
         tempo.vis = vis_time
       }
 
-      tempo.arr = randArr.slice()
 
       //appending results arr with tempo
       let updateUsers = [...resultsArr, tempo]
@@ -214,9 +212,6 @@ function Sortingalgo() {
     //       setCompleted(true)
     //     })()
   }
-  var data = ''
-  var resARrrr = []
-  if (randArr) resARrrr = randArr
 
   return (
     <>
@@ -231,23 +226,42 @@ function Sortingalgo() {
           }}
         />
 
-        <div className='sortingrangearea flex justify-between items-center relative'>
+        <div className='sortingrangearea flex justify-between items-center relative '>
           {/* left align speed bar */}
 
-          <label className='addArray absolute top-0 left-0'>
-            <DownOutlined />
-            <label>
+          <label className='addArray absolute top-16 left-1 flex '>
+            <Button style={{ height: '100%', padding: '6px' }} onClick={(e)=>{
+              var buttonRef=document.getElementById('rotateDown');
+
+              
+              buttonRef.classList.toggle('active');
+
+             
+              var ref = arrInputREf.current.parentNode.parentNode;
+                // ref.style.width ===
+                // '100%'?ref.style.width='0':ref.style.width='100%';
+                ref.id === 'visibleArrayInput'?ref.id='hiddenArrayInput':ref.id='visibleArrayInput';
+            }}>
               {' '}
-              <div className='flex flex-col'>
-                Enter Array
-                <div className='flex h-8'>
-                  <input type='text' ref={arrInputREf} className='w-36' />
-                  <Button type='primary'  onClick={setInputArr} className='h-8'>
-                    Set Arr
+              <LeftOutlined className='text-2xl' id='rotateDown' style={{ marginLeft: '0' }} />
+            </Button>
+
+            <span>
+              {' '}
+              <div  className='flex flex-col w-0' id='hiddenArrayInput' style={{overflow:'hidden',transition: 'width 1s'}}>
+                <div className='flex h-10'>
+                  <input
+                    type='text'
+                    placeholder='&nbsp;&nbsp;&nbsp;Enter array'
+                    ref={arrInputREf}
+                    className='w-36'
+                  />
+                  <Button type='primary' onClick={setInputArr} style={{height:'2.5rem'}}>
+                    Set
                   </Button>
                 </div>
               </div>
-            </label>
+            </span>
           </label>
 
           <label className='rangeVertical'>
@@ -271,87 +285,38 @@ function Sortingalgo() {
           {/* middle area for sorting show */}
           <div className='sortingarea'>
             {/* bars giving us bars of given data wiith particular colour needed */}
-            <Bars
-              arr={randArr}
-              compare={sortStatus && compare}
-              swap={sortStatus && swap}
-              sorted={sortedIndex}
-              // shuffle={didShuffle}
-            />
+            <div className='barsArea'>
+              <Bars
+                arr={randArr}
+                compare={sortStatus && compare}
+                swap={sortStatus && swap}
+                sorted={sortedIndex}
+                // shuffle={didShuffle}
+              />
+            </div>
 
             {/*For representation of colours in bars  */}
             <br />
             <Legends />
             <br />
 
+            {resultsArr.length === 0 ? (
+              <></>
+            ) : (
+              <Table
+                className='mx-auto'
+                style={{ width: '75vw' }}
+                columns={TableSyntax}
+                dataSource={resultsArr}
+                pagination={{
+                  position: ['none', 'none'],
+                }}
+                scroll={{ x: 1300, y: 400 }}
+              />
+            )}
             {/* results shown of sort i table */}
-            <div style={{ overflow: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr>
-                    <th>S.no</th>
-                    <th>Sort used</th>
-                    <th className='mightVanish'>Array used</th>
-                    <th className='mightVanish'>Array result</th>
-                    <th>Comparisons done</th>
-                    <th>Swaps done</th>
-                    <th>Visualise Time</th>
-                  </tr>
-                </thead>
-                {/* mapping resultsArr for showing results */}
-                <tbody id='resultsOfAlgos'>
-                  {resultsArr.map((val, index) => {
-                    if (index != 0)
-                      return (
-                        <tr key={index}>
-                          <td>{index}</td>
-                          <td>{val.sort}</td>
-                          <td className='mightVanish'>
-                            {val.arr.map((item, indx) => {
-                              // console.log('arr '+item+' '+val.arr);
-                              data += String(item) + ','
-                              if (indx == val.arr.length - 1) {
-                                let i = data
-                                data = ''
-                                return (
-                                  <Input
-                                    key={indx}
-                                    defaultValue={i.substring(0, i.length - 1)}
-                                    style={{ width: '60px' }}
-                                    disabled
-                                  ></Input>
-                                )
-                              }
-                            })}
-                          </td>
-                          <td className='mightVanish'>
-                            {resARrrr.map((item, indx) => {
-                              // console.log('arr '+item+' '+val.arr);
-                              data += String(item) + ','
-                              if (indx == val.arr.length - 1) {
-                                let i = data
-                                data = ''
-                                return (
-                                  <Input
-                                    key={indx}
-                                    defaultValue={i.substring(0, i.length - 1)}
-                                    style={{ width: '60px' }}
-                                    disabled
-                                  ></Input>
-                                )
-                              }
-                            })}
-                          </td>
-                          <td>{val.comparison}</td>
-                          <td>{val.swap}</td>
-                          <td>{(val.vis / 1000).toFixed(2)}s</td>
-                        </tr>
-                      )
-                  })}
-                </tbody>
-              </table>
-            </div>
           </div>
+
           {/* right align num bar */}
           <label className='rangeVertical'>
             Num

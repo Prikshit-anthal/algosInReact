@@ -1,5 +1,6 @@
 import React, { useEffect,useRef } from "react";
-import { Table,Slider, Input, Button } from 'antd'
+import { Table,Slider,Select, Input, Button } from 'antd'
+const {Option}=Select;
 
 function Nav(props)
 {
@@ -39,24 +40,18 @@ function Nav(props)
                defaultValue={valuerange}
                // onInput={setValuerange(0)}
              ></Input>
-             <Slider
-               min={5}
-               max={100}
-              //  onChange={this.onChange}
-              //  value={typeof inputValue === 'number' ? inputValue : 0}
-             />
            </label>
            <div>{valuerange}</div>
          </div>
          <div className='sortalgos'>
            <div>ALgorithms</div>
            <div className='drop_down'>
-             <select>
-               <option value='volvo'>Bubble sort</option>
-               <option value='saab'>Insertion sort</option>
-               <option value='mercedes'>Heap sort</option>
-               <option value='audi'>Quick sort</option>
-             </select>
+             <Select defaultValue='bubble' className="w-32">
+               <Option value='bubble'>Bubble sort</Option>
+               <Option value='insertion'>Insertion sort</Option>
+               <Option value='heap'>Heap sort</Option>
+               <Option value='quick'>Quick sort</Option>
+             </Select>
            </div>
          </div>
 
