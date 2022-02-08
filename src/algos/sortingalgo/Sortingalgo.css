@@ -21,6 +21,38 @@ font-family: system-ui;
 /* .sortingrangearea{
     min-height:85vh;
 } */
+
+.breakFlexWithMe{
+display:none;
+}
+ @media only screen and (max-width: 600px) {
+ .shuffle_sort{
+  order:4;
+
+
+} 
+.breakFlexWithMe{
+  order:3;
+  display:block;
+    flex: 0 0 100%;
+}
+.value_range{
+order:1;
+
+}
+.sortalgos {
+order:2;
+
+}
+.sort_visualise{
+  order:5;
+  
+
+}
+.sort_visualise,.shuffle_sort{
+margin-bottom:10px;
+}
+}
 .rangeVertical{
     border: 1px solid black;
     border-radius: 1%;
@@ -104,9 +136,7 @@ width:100%;
 .rangeVertical{
     height:110px;
 }
-#imRange{
-    width:70px;
-}
+
 }
 @media only screen and (max-width: 550px) {
 
@@ -118,15 +148,7 @@ table .mightVanish{
 }
 }
 
-@media only screen and (max-width: 350px) {
-table th{
-    font-size:0.8rem;
-}
-table td{
-    font-size:0.7rem;
-}
 
-}
 @media only screen and (max-width: 410px) {
 .rangeVertical{
     font-size:0.8rem;

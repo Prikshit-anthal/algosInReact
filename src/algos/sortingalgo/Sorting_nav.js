@@ -19,13 +19,16 @@ function Nav(props)
 
    return (
      <>
-       <div className='sorting_nav flex justify-between items-center bg-teal-600'>
-         <Button type='primary' className='shuffle_sort'>
+       <div className='sorting_nav flex justify-between items-center flex-wrap bg-teal-600'>
+        
+        <div className="breakFlexWithMe"></div>
+
+         <Button type='primary' className='shuffle_sort mx-4 '>
            Shuffle
          </Button>
-         <div className='value_range'>
+         <div className='value_range mx-4'>
            <label className='rangeType flex flex-col text-center'>
-             Val range
+             Value range
              <input
                type='range'
                id='imRange'
@@ -41,12 +44,11 @@ function Nav(props)
                // onInput={setValuerange(0)}
              ></input>
            </label>
-           <div>{valuerange}</div>
+           <div className='text-center'>{valuerange}</div>
          </div>
-         <div className='sortalgos'>
-           <div>ALgorithms</div>
+         <div className='sortalgos mx-4'>
            <div className='drop_down'>
-             <Select defaultValue='bubble' className="w-32">
+             <Select defaultValue='bubble' className='w-32'>
                <Option value='bubble'>Bubble sort</Option>
                <Option value='insertion'>Insertion sort</Option>
                <Option value='heap'>Heap sort</Option>
@@ -57,7 +59,7 @@ function Nav(props)
 
          <Button
            type='primary'
-           className='sort_visualise'
+           className='sort_visualise  mx-4 '
            onClick={() => {
              setSortedIndex([])
              handleSort()
