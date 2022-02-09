@@ -1,28 +1,24 @@
-import { render } from "@testing-library/react"
 
-var data=''
+
 export const TableSyntax = [
   {
     title: 'S.no',
     fixed: 'left',
     width: 60,
-    render: (item, data, idx) => <>{idx}</>,
+    render: (item, data, idx) => <>{idx+1}</>,
   },
   {
     title: 'sort',
     dataIndex: 'sort',
-    key: 'key',
-    // width: 150,
+    
   },
   {
     title: 'arrResult',
     dataIndex: 'arrResult',
-    key: 'key',
-    // width: 100,
     render: (val, data, index) => (
       <div className='w-32 overflow-x-scroll whitespace-nowrap' key={index}>
         {val.map((item, idx) =>
-          idx === val.length - 1 ? <>{item}</> : <>{item},</>
+          idx === val.length - 1 ? <span key={idx}>{item}</span> : <span key={idx}>{item},</span>
         )}
       </div>
     ),
@@ -31,12 +27,11 @@ export const TableSyntax = [
   {
     title: 'arrUsed',
     dataIndex: 'arrUsed',
-    key: 'key',
     // width: 100,
     render: (val, data, index) => (
       <div className='w-32 overflow-x-scroll whitespace-nowrap' key={index}>
         {val.map((item, idx) =>
-          idx === val.length - 1 ? <>{item}</> : <>{item},</>
+          idx === val.length - 1 ? <span key={idx}>{item}</span> : <span key={idx}>{item},</span>
         )}
       </div>
     ),
@@ -45,19 +40,17 @@ export const TableSyntax = [
   {
     title: 'comparison',
     dataIndex: 'comparison',
-    key: 'key',
     // width: 50,
+    
   },
   {
     title: 'swap',
     dataIndex: 'swap',
-    key: 'key',
     // width: 50,
   },
   {
     title: 'visualise time',
     dataIndex: 'vis',
-    key: 'key',
     width: 90,
     fixed: 'right',
     render: (val) => {

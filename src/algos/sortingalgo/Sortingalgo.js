@@ -121,11 +121,12 @@ function Sortingalgo() {
     //so speed can be changed
     async function sortAccOrder(op) {
       //getting order arr which contains sort info
-      var order = op[0];
-      
+      var order = op[0]
+
       //creating temporary obj to copy at last in resultsArr
-      
-      var tempo = {
+
+      let tempo = {
+        key:0,
         sort: 'Bubble',
         comparison: 0,
         swap: 0,
@@ -153,8 +154,7 @@ function Sortingalgo() {
               }
 
               if (arr_check) {
-
-                tempo.arrResult = randArr;
+                tempo.arrResult = randArr
                 swap2ArrayElements(tempo.arrResult, j, k)
                 //console.log(tempo.arrResult+'  ');
                 setrandArr(tempo.arrResult)
@@ -177,7 +177,10 @@ function Sortingalgo() {
         vis_time += endTime - startTime
         tempo.vis = vis_time
       }
-
+       //generating new key for table data
+      resultsArr.length === 0
+        ? (tempo.key = 0)
+        : (tempo.key = resultsArr[resultsArr.length - 1].key + 1)
       //appending results arr with tempo
       let updateUsers = [...resultsArr, tempo]
 
@@ -211,6 +214,7 @@ function Sortingalgo() {
     //     })()
   }
 
+  
   return (
     <>
       <div className='sorting_container'>
