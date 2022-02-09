@@ -86,12 +86,19 @@ margin-bottom:10px;
     min-height:65vh;
 }
 
-#hiddenArrayInput{
+
+.toSlideContainer{
+overflow: 'hidden';
+transition: 'width 1s';
+}
+.hiddenToSlide{
 width:0;
 }
-#visibleArrayInput{
+.visibleToSlide{
 width:100%;
 }
+
+
 .sortingrangearea #rotateDown{
     -moz-transition: all .5s linear;
     -webkit-transition: all .5s linear;

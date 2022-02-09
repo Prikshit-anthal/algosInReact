@@ -1,25 +1,49 @@
 //imports
 import React, { useRef, useEffect, useState } from 'react'
 import './Sortingalgo.css'
-import Sorting_nav from './Sorting_nav'
+import SortingNav from './Sorting_nav'
 import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
 import Legends from './Legends'
-import { Table, Input, Button } from 'antd'
-import { LeftOutlined } from '@ant-design/icons'
-import {TableSyntax} from './SortConstants'
+import { Table, Button } from 'antd'
+import { TableSyntax } from './SortConstants'
+import {
+  createRandomArray,
+  removeCommaAndMakeArray,
+} from '../../components/randomArray/randArr'
+import SlideArrayInputTag from '../../components/slideArrayInputTag/slideArrayInputTag'
+
 function Sortingalgo() {
   // All useStates
   const [valuerange, setValuerange] = useState(80)
   const [sortSpeed, setSortSpeed] = useState(50)
-  const [value2range, setValue2range] = useState(20)
+  const [value2range, setValue2range] = useState(15)
   const [randArr, setrandArr] = useState([])
   const [compare, setCompare] = useState([])
   const [swap, setSwap] = useState([])
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus, setSortStatus] = useState(false)
   const arrInputREf = useRef(null)
+  const tagToSlideRef=useRef(null);
+  //sort stat results array
+  const [resultsArr, setResultsArr] = useState([])
+  const MIN=5;
+  const MAX_NO_OF_BARS =
+    window.innerWidth >= 900
+      ? 100
+      : window.innerWidth >= 600
+      ? 60
+      : window.innerWidth >= 500
+      ? 50
+      : window.innerWidth >= 400
+      ? 30
+      : window.innerWidth>=200
+      ?10
+      :10;
 
+
+
+  //restricting input of array
   useEffect(() => {
     arrInputREf.current.setAttribute(
       'onkeypress',
@@ -28,97 +52,69 @@ function Sortingalgo() {
     arrInputREf.current.setAttribute('onpaste', 'return false;')
   })
 
-  //sort stat results array
-  const [resultsArr, setResultsArr] = useState([])
-
-  const setInputArr = () => {
-    //  console.log('hi')
-    setSortedIndex([])
-    let initIndex = 0
-    let commaIdx = arrInputREf.current.value.indexOf(',', 0)
-    // console.log(commaIdx)
-    var arr = []
-    while (commaIdx != -1) {
-      arr.push(
-        Number(String(arrInputREf.current.value).substring(initIndex, commaIdx))
-      )
-      initIndex = commaIdx + 1
-      commaIdx = arrInputREf.current.value.indexOf(',', initIndex)
-    }
-    arr.push(
-      Number(
-        String(arrInputREf.current.value).substring(
-          initIndex,
-          arrInputREf.current.value.length
-        )
-      )
-    )
-    if (arr.length > 100) {
-      alert('Max array length:100')
-      return
-    }
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] > 100 || arr[i] == 0) {
-        alert('array range:[0,100] input syntax:[val1,val2]')
-        return
-      }
-    }
-    //console.log(arr);
-    setrandArr(arr)
-  }
-
   //getting random array
   useEffect(() => {
-    function getRandomInt(min, max) {
-      min = Math.ceil(min)
-      max = Math.floor(max)
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
     //event listener for shuffle Button so it calls setarr fn
     var shuf_but = document.getElementsByClassName('shuffle_sort')[0]
-    shuf_but.addEventListener('click', setarr)
-
-    function setarr() {
+    shuf_but.addEventListener('click', () => {
       setSortedIndex([])
-
-      setrandArr((arr) => {
-        var temp = []
-        for (var i = 0; i < value2range; i++) {
-          temp.push(getRandomInt(5, valuerange))
-        }
-
-        setrandArr(temp)
-      })
-    }
-    setarr()
+      setrandArr(createRandomArray(5, valuerange, value2range))
+    })
+    setSortedIndex([])
+    setrandArr(createRandomArray(5, valuerange, value2range))
 
     //removing eventlistener to avoid multiple eventlisteners and abrupt behavior
     return function cleanupListener() {
-      shuf_but.removeEventListener('click', setarr)
+      shuf_but.removeEventListener('click', () => {
+        setSortedIndex([])
+        setrandArr(createRandomArray(5, valuerange, value2range))
+      })
     }
   }, [value2range, valuerange])
 
+  //comma separeted value extraction
+  const setInputArr = () => {
+    //  console.log('hi')
+    //arrInputREf.current.value
+    setSortedIndex([])
+    let arr = removeCommaAndMakeArray(String(arrInputREf.current.value))
+    if (arr.length > MAX_NO_OF_BARS) {
+      alert(`Max array length: ${MAX_NO_OF_BARS}`)
+      return
+    }
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > MAX_NO_OF_BARS || arr[i] === 0) {
+        alert(`array range:[0,${MAX_NO_OF_BARS}] input syntax:[val1,val2]`)
+        return
+      }
+    }
+    setrandArr(arr)
+  }
+
   //disabling no using Button while soting is going on
   useEffect(() => {
-    if (sortStatus == true) {
+    if (sortStatus === true) {
       document.getElementsByClassName('impright')[0].disabled = true
       document.getElementById('imRange').disabled = true
       document.getElementsByClassName('sort_visualise')[0].disabled = true
+
+      document.getElementsByClassName('shuffle_sort')[0].disabled = true
     } else {
       document.getElementsByClassName('impright')[0].disabled = false
       document.getElementById('imRange').disabled = false
       document.getElementsByClassName('sort_visualise')[0].disabled = false
+      document.getElementsByClassName('shuffle_sort')[0].disabled = false
     }
   }, [sortStatus])
 
   //reference for latest value for setTimeout
-  const countRef = useRef(sortSpeed)
-  countRef.current = sortSpeed
+  const refForSortSpeedLatest = useRef(sortSpeed)
+  refForSortSpeedLatest.current = sortSpeed
 
   //working fn which calls sort and extract infor from returned array
   const handleSort = () => {
     //visibility time of sorting going on
-    var vis_time = 0
+    let vis_time = 0
 
     //async fn and promise used to change setTimeout time intervals
     //so speed can be changed
@@ -133,11 +129,11 @@ function Sortingalgo() {
         swap: 0,
         vis: 0,
         arrResult: randArr,
-        arrUsed:randArr
+        arrUsed: randArr,
       }
 
       //looping order array with promise to avoid skipping
-      for (var idx = 0; idx < order.length; idx++) {
+      for (let idx = 0; idx < order.length; idx++) {
         function tooth() {
           return new Promise((resolve) => {
             setTimeout(() => {
@@ -163,9 +159,9 @@ function Sortingalgo() {
 
                 tempo.swap++
               }
-            }, (100 * 40) / countRef.current) //dynamic changing of speed
+            }, (100 * 40) / refForSortSpeedLatest.current) //dynamic changing of speed
 
-            setTimeout(resolve, (100 * 40) / countRef.current) //returning promise
+            setTimeout(resolve, (100 * 40) / refForSortSpeedLatest.current) //returning promise
           })
         }
         //performance.now() to get visualiser time took
@@ -178,7 +174,6 @@ function Sortingalgo() {
         vis_time += endTime - startTime
         tempo.vis = vis_time
       }
-
 
       //appending results arr with tempo
       let updateUsers = [...resultsArr, tempo]
@@ -217,7 +212,7 @@ function Sortingalgo() {
     <>
       <div className='sorting_container'>
         {/* sorting navbar */}
-        <Sorting_nav
+        <SortingNav
           obj={{
             valuerange: valuerange,
             setValuerange: setValuerange,
@@ -228,27 +223,21 @@ function Sortingalgo() {
 
         <div className='sortingrangearea flex justify-between items-center relative '>
           {/* left align speed bar */}
-
-          <label className='addArray absolute top-16 left-1 flex '>
-            <Button style={{ height: '100%', padding: '6px' }} onClick={(e)=>{
-              var buttonRef=document.getElementById('rotateDown');
-
-              
-              buttonRef.classList.toggle('active');
-
-             
-              var ref = arrInputREf.current.parentNode.parentNode;
-                // ref.style.width ===
-                // '100%'?ref.style.width='0':ref.style.width='100%';
-                ref.id === 'visibleArrayInput'?ref.id='hiddenArrayInput':ref.id='visibleArrayInput';
-            }}>
-              {' '}
-              <LeftOutlined className='text-2xl' id='rotateDown' style={{ marginLeft: '0' }} />
-            </Button>
-
+          <span className='flex absolute top-16 left-1'>
+            {/* using sliding arrowbar to get down input array */}
+            <SlideArrayInputTag tagToSlideRef={tagToSlideRef} />
             <span>
               {' '}
-              <div  className='flex flex-col w-0' id='hiddenArrayInput' style={{overflow:'hidden',transition: 'width 1s'}}>
+              <div
+                className='hiddenToSlide'
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'width 1s',
+                  
+                }}
+                ref={tagToSlideRef}
+              >
                 <div className='flex h-10'>
                   <input
                     type='text'
@@ -256,14 +245,17 @@ function Sortingalgo() {
                     ref={arrInputREf}
                     className='w-36'
                   />
-                  <Button type='primary' onClick={setInputArr} style={{height:'2.5rem'}}>
+                  <Button
+                    type='primary'
+                    onClick={setInputArr}
+                    style={{ height: '2.5rem' }}
+                  >
                     Set
                   </Button>
                 </div>
               </div>
             </span>
-          </label>
-
+          </span>
           <label className='rangeVertical'>
             <div>Speed</div>
 
@@ -316,7 +308,6 @@ function Sortingalgo() {
             )}
             {/* results shown of sort i table */}
           </div>
-
           {/* right align num bar */}
           <label className='rangeVertical'>
             Num
@@ -327,7 +318,7 @@ function Sortingalgo() {
               className='impright'
               type='range'
               min={5}
-              max={100}
+              max={MAX_NO_OF_BARS}
               step={1}
               defaultValue={value2range}
               style={{ transform: 'rotateZ(0.75turn)' }}
