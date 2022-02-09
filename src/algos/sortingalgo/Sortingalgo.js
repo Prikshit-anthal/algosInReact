@@ -1,4 +1,5 @@
 //imports
+import { swap2ArrayElements } from '../../constants'
 import React, { useRef, useEffect, useState } from 'react'
 import './Sortingalgo.css'
 import SortingNav from './Sorting_nav'
@@ -138,7 +139,7 @@ function Sortingalgo() {
           return new Promise((resolve) => {
             setTimeout(() => {
               //console.log('hi' + idx)
-              const [j, k, arr, index] = order[idx]
+              let [j, k, arr_check, index] = order[idx]
 
               setCompare([j, k])
 
@@ -150,11 +151,14 @@ function Sortingalgo() {
                 setSortedIndex((prevState) => [...prevState, index])
               }
 
-              if (arr) {
+              if (arr_check) {
                 //console.log(arr)
-                tempo.arrResult = arr
-
-                setrandArr(arr)
+                
+                tempo.arrResult = randArr;
+                console.log(tempo.arrResult+'  ');
+                swap2ArrayElements(tempo.arrResult, j, k)
+                console.log(tempo.arrResult+'  ');
+                setrandArr(tempo.arrResult)
                 if (j !== null || k != null) setSwap([j, k])
 
                 tempo.swap++
