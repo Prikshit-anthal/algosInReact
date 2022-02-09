@@ -27,7 +27,7 @@ const bubbleSort = (blocks) => {
 
  
 
-  return order
+  return [order, blocks]
 }
 
 export default bubbleSort

@@ -121,16 +121,17 @@ function Sortingalgo() {
     //so speed can be changed
     async function sortAccOrder(op) {
       //getting order arr which contains sort info
-      var order = op
-
+      var order = op[0];
+      
       //creating temporary obj to copy at last in resultsArr
+      
       var tempo = {
         sort: 'Bubble',
         comparison: 0,
         swap: 0,
         vis: 0,
         arrResult: randArr,
-        arrUsed: randArr,
+        arrUsed: op[1].slice(),
       }
 
       //looping order array with promise to avoid skipping
@@ -152,12 +153,10 @@ function Sortingalgo() {
               }
 
               if (arr_check) {
-                //console.log(arr)
-                
+
                 tempo.arrResult = randArr;
-                console.log(tempo.arrResult+'  ');
                 swap2ArrayElements(tempo.arrResult, j, k)
-                console.log(tempo.arrResult+'  ');
+                //console.log(tempo.arrResult+'  ');
                 setrandArr(tempo.arrResult)
                 if (j !== null || k != null) setSwap([j, k])
 
