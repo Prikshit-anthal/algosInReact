@@ -13,6 +13,10 @@ import {
   removeCommaAndMakeArray,
 } from '../../components/randomArray/randArr'
 import SlideArrayInputTag from '../../components/slideArrayInputTag/slideArrayInputTag'
+import insertionSort from './algos/InsertionSort'
+import selectionSort from './algos/SelectionSort'
+import mergeSort from './algos/MergeSort'
+import heapSort from './algos/HeapSort'
 
 function Sortingalgo() {
   // All useStates
@@ -97,21 +101,6 @@ function Sortingalgo() {
     setrandArr(arr)
   }
 
-  //disabling no using Button while soting is going on
-  // useEffect(() => {
-  //   if (sortStatus === true) {
-  //     document.getElementsByClassName('impright')[0].disabled = true
-  //     document.getElementById('imRange').disabled = true
-  //     document.getElementsByClassName('sort_visualise')[0].disabled = true
-
-  //     document.getElementsByClassName('shuffle_sort')[0].disabled = true
-  //   } else {
-  //     document.getElementsByClassName('impright')[0].disabled = false
-  //     document.getElementById('imRange').disabled = false
-  //     document.getElementsByClassName('sort_visualise')[0].disabled = false
-  //     document.getElementsByClassName('shuffle_sort')[0].disabled = false
-  //   }
-  // }, [sortStatus])
 
   //reference for latest value for setTimeout
   const refForSortSpeedLatest = useRef(sortSpeed)
@@ -199,9 +188,14 @@ function Sortingalgo() {
     setSortStatus(true)
 
     //calling sort
-    var op = bubbleSort(randArr)
+    //var op = bubbleSort(randArr)
+    // insertionSort(randArr)
+    // selectionSort(randArr)
+    // mergeSort(randArr)
+    heapSort(randArr)
     // console.log(op[1]+" ms");
-    sortAccOrder(op)
+    
+    //sortAccOrder(op)
 
     // algo === 'bubbleSort'
     //   ? sortAccOrder(bubbleSort(blocks))
