@@ -15,15 +15,13 @@ function App() {
   return (
     <>
       <Nav />
-      <Router>
         <Routes>
-          <Route path={process.env.PUBLIC_URL + '/'} element={<Homepage />} />
+          <Route path={'/'} element={<Homepage />} />
           <Route
-            path={process.env.PUBLIC_URL + '/sortingalgo'}
+            path={'/sortingalgo'}
             element={<Sortingalgo />}
           />
         </Routes>
-      </Router>
       <Footer />
     </>
   )

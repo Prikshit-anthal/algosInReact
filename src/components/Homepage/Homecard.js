@@ -7,7 +7,8 @@ function Card(props)
     const{src,link,title,subtitle,desc}=props.obj;
     return (
       <>
-        <Link to={process.env.PUBLIC_URL + '/sortingalgo'}>
+        <Link to={link}>
+         
           <div
             className='blog-card spring-fever'
             style={{
