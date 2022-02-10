@@ -1,5 +1,5 @@
 import React, { useEffect,useRef } from "react";
-import { Table,Slider,Select, Input, Button } from 'antd'
+import { Slider,Select,  Button } from 'antd'
 const {Option}=Select;
 
 function Nav(props)
@@ -8,7 +8,7 @@ function Nav(props)
        valuerange,
        setValuerange,
        handleSort,
-
+       sortStatus,
        setSortedIndex,
        
      } = props.obj
@@ -20,8 +20,7 @@ function Nav(props)
    return (
      <>
        <div className='sorting_nav flex justify-between items-center flex-wrap bg-teal-600'>
-        
-        <div className="breakFlexWithMe"></div>
+         <div className='breakFlexWithMe'></div>
 
          <Button type='primary' className='shuffle_sort mx-4 '>
            Shuffle
@@ -29,7 +28,7 @@ function Nav(props)
          <div className='value_range mx-4'>
            <label className='rangeType flex flex-col text-center'>
              Value range
-             <input
+             {/* <input
                type='range'
                id='imRange'
                onChange={(e) => {
@@ -42,7 +41,18 @@ function Nav(props)
                // value={len}
                defaultValue={valuerange}
                // onInput={setValuerange(0)}
-             ></input>
+             ></input> */}
+             <Slider
+               className="w-32"
+               min={5}
+               max={100}
+               //  disabled={sorting}
+               disabled={sortStatus}
+               defaultValue={valuerange}
+               onChange={(value) => {
+                 setValuerange(value)
+               }}
+             />
            </label>
            <div className='text-center'>{valuerange}</div>
          </div>

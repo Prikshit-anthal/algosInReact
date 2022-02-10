@@ -1,5 +1,6 @@
 import {  Button } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
+import './slideArrayInputTag.css'
 
 function SlideArrayInputTag({tagToSlideRef}) {
   return (
@@ -7,8 +8,9 @@ function SlideArrayInputTag({tagToSlideRef}) {
       <Button
         style={{ height: '100%', padding: '6px' }}
         onClick={(e) => {
-          var buttonRef = document.getElementById('rotateDown')
-
+          var buttonRef = e.target.parentNode.parentNode.parentNode.querySelector('.rotateDown')
+          //button of antD sometime gives e as inner icon ref
+         
           buttonRef.classList.toggle('active')
 
           var ref = tagToSlideRef.current
@@ -19,9 +21,10 @@ function SlideArrayInputTag({tagToSlideRef}) {
       >
         {' '}
         <LeftOutlined
-          className='text-2xl'
-          id='rotateDown'
-          style={{ marginLeft: '0' }}
+          className='text-2xl rotateDown'
+          style={{ marginLeft: '0',
+         transition: 'all .5s linear',
+    }}
         />
       </Button>
     </span>

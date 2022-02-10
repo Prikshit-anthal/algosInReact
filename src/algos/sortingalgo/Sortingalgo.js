@@ -93,20 +93,20 @@ function Sortingalgo() {
   }
 
   //disabling no using Button while soting is going on
-  useEffect(() => {
-    if (sortStatus === true) {
-      document.getElementsByClassName('impright')[0].disabled = true
-      document.getElementById('imRange').disabled = true
-      document.getElementsByClassName('sort_visualise')[0].disabled = true
+  // useEffect(() => {
+  //   if (sortStatus === true) {
+  //     document.getElementsByClassName('impright')[0].disabled = true
+  //     document.getElementById('imRange').disabled = true
+  //     document.getElementsByClassName('sort_visualise')[0].disabled = true
 
-      document.getElementsByClassName('shuffle_sort')[0].disabled = true
-    } else {
-      document.getElementsByClassName('impright')[0].disabled = false
-      document.getElementById('imRange').disabled = false
-      document.getElementsByClassName('sort_visualise')[0].disabled = false
-      document.getElementsByClassName('shuffle_sort')[0].disabled = false
-    }
-  }, [sortStatus])
+  //     document.getElementsByClassName('shuffle_sort')[0].disabled = true
+  //   } else {
+  //     document.getElementsByClassName('impright')[0].disabled = false
+  //     document.getElementById('imRange').disabled = false
+  //     document.getElementsByClassName('sort_visualise')[0].disabled = false
+  //     document.getElementsByClassName('shuffle_sort')[0].disabled = false
+  //   }
+  // }, [sortStatus])
 
   //reference for latest value for setTimeout
   const refForSortSpeedLatest = useRef(sortSpeed)
@@ -225,6 +225,7 @@ function Sortingalgo() {
             setValuerange: setValuerange,
             handleSort: handleSort,
             setSortedIndex: setSortedIndex,
+            sortStatus: sortStatus,
           }}
         />
 
@@ -278,7 +279,15 @@ function Sortingalgo() {
               // transform used to show it vertical
               style={{ transform: 'rotateZ(0.75turn)' }}
             /> */}
-            <Slider vertical defaultValue={30} />
+            <Slider
+              vertical
+              className='impleft'
+              min={5}
+              defaultValue={50}
+              onChange={(value) => {
+                setSortSpeed(value)
+              }}
+            />
             <div>{sortSpeed}</div>
           </label>
           {/* middle area for sorting show */}
@@ -299,26 +308,12 @@ function Sortingalgo() {
             <Legends />
             <br />
 
-            {resultsArr.length === 0 ? (
-              <></>
-            ) : (
-              <Table
-                className='mx-auto'
-                style={{ width: '75vw' }}
-                columns={TableSyntax}
-                dataSource={resultsArr}
-                pagination={{
-                  position: ['none', 'none'],
-                }}
-                scroll={{ x: 1300, y: 400 }}
-              />
-            )}
             {/* results shown of sort i table */}
           </div>
           {/* right align num bar */}
           <label className='rangeVertical'>
             Num
-            <input
+            {/* <input
               onChange={(e) => {
                 setValue2range(e.target.value)
               }}
@@ -329,10 +324,37 @@ function Sortingalgo() {
               step={1}
               defaultValue={value2range}
               style={{ transform: 'rotateZ(0.75turn)' }}
+            /> */}
+            <Slider
+              vertical
+              className='impright'
+              min={MIN}
+              max={MAX_NO_OF_BARS}
+              disabled={sortStatus}
+              defaultValue={15}
+              onChange={(value) => {
+                setValue2range(value)
+              }}
             />
             <div>{value2range}</div>
           </label>
         </div>
+        <br />
+        {resultsArr.length === 0 ? (
+          <></>
+        ) : (
+          <Table
+            className='mx-auto'
+            style={{ width: '75vw' }}
+            columns={TableSyntax}
+            dataSource={resultsArr}
+            pagination={{
+              position: ['none', 'none'],
+            }}
+            scroll={{ x: 800, y: 400 }}
+          />
+        )}
+        <br />
       </div>
     </>
   )

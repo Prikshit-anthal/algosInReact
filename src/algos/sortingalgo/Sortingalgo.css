@@ -99,18 +99,7 @@ width:100%;
 }
 
 
-.sortingrangearea #rotateDown{
-    -moz-transition: all .5s linear;
-    -webkit-transition: all .5s linear;
-    transition: all .5s linear;
-    }
 
-.sortingrangearea #rotateDown.active
-{
-    -moz-transform:rotate(180deg);
-    -webkit-transform:rotate(180deg);
-    transform:rotate(180deg);
-}
 .toggle{
     position: relative;
     display: inline-block;
