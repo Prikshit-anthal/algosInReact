@@ -79,13 +79,18 @@ function Sortingalgo() {
     //arrInputREf.current.value
     setSortedIndex([])
     let arr = removeCommaAndMakeArray(String(arrInputREf.current.value))
+    console.log(arr)
     if (arr.length > MAX_NO_OF_BARS) {
       alert(`Max array size: ${MAX_NO_OF_BARS}`)
       return
     }
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i] > 100 || arr[i] === 0) {
-        alert(`array range:(0,${100}] input syntax:[val1,val2]`)
+      console.log( typeof arr[i]+" "+isNaN(arr[i]))
+      
+     
+      if (isNaN(arr[i]) || arr[i] > 100 || arr[i] === 0) {
+        console.log(!isNaN(arr[i]))
+        alert(`array range:(0,${100}] input syntax:val1,val2`)
         return
       }
     }
@@ -248,7 +253,7 @@ function Sortingalgo() {
                 <div className='flex h-10'>
                   <input
                     type='text'
-                    placeholder='&nbsp;&nbsp;&nbsp;Enter array'
+                    placeholder='Enter array: x,y,....'
                     ref={arrInputREf}
                     className='w-36'
                   />

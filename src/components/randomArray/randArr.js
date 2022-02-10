@@ -23,19 +23,19 @@ export function getRandomInt(min, max) {
       var arr = []
       while (commaIdx !== -1) {
         arr.push(
-          Number(
+         
             data_string.substring(initIndex, commaIdx)
-          )
+          
         )
         initIndex = commaIdx + 1
         commaIdx = data_string.indexOf(',', initIndex)
       }
       arr.push(
-        Number(
+        
          data_string.substring(
             initIndex,
             data_string.length
-          )
+          
         )
       )
      
