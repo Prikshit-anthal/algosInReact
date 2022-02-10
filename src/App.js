@@ -16,9 +16,9 @@ function App() {
     <>
       <Nav />
         <Routes>
-          <Route path={'/'} element={<Homepage />} />
+          <Route path='/' element={<Homepage />} />
           <Route
-            path={'/sortingalgo'}
+            path='/sortingalgo'
             element={<Sortingalgo />}
           />
         </Routes>

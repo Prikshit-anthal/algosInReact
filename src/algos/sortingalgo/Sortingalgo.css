@@ -161,3 +161,11 @@ table .mightVanish{
     font-size:0.8rem;
 }
 }
+@media only screen and (max-height: 400px) {
+.rangeVertical input{
+    width:70px;
+}
+.rangeVertical{
+    height:110px;
+}
+}

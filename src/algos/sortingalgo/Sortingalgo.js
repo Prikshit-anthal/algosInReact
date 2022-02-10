@@ -80,12 +80,12 @@ function Sortingalgo() {
     setSortedIndex([])
     let arr = removeCommaAndMakeArray(String(arrInputREf.current.value))
     if (arr.length > MAX_NO_OF_BARS) {
-      alert(`Max array length: ${MAX_NO_OF_BARS}`)
+      alert(`Max array size: ${MAX_NO_OF_BARS}`)
       return
     }
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i] > MAX_NO_OF_BARS || arr[i] === 0) {
-        alert(`array range:[0,${MAX_NO_OF_BARS}] input syntax:[val1,val2]`)
+      if (arr[i] > 100 || arr[i] === 0) {
+        alert(`array range:(0,${100}] input syntax:[val1,val2]`)
         return
       }
     }
@@ -230,7 +230,7 @@ function Sortingalgo() {
 
         <div className='sortingrangearea flex justify-between items-center relative '>
           {/* left align speed bar */}
-          <span className='flex absolute top-16 left-1'>
+          <span className='flex absolute top-4 left-1'>
             {/* using sliding arrowbar to get down input array */}
             <SlideArrayInputTag tagToSlideRef={tagToSlideRef} />
             <span>
