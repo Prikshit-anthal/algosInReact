@@ -254,6 +254,7 @@ function Sortingalgo() {
                   />
                   <Button
                     type='primary'
+                    disabled={sortStatus}
                     onClick={setInputArr}
                     style={{ height: '2.5rem' }}
                   >
