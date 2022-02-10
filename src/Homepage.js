@@ -11,7 +11,7 @@ function Homepage()
           Visualize algorithms for a better understanding
         </div>
         <Homegrid/>
-        <ul>
+        {/* <ul>
           <li>
             <Link to='/towerOfHanoi'>Tower of Hanoi</Link>
           </li>
@@ -19,7 +19,7 @@ function Homepage()
           <li>
             <Link to='/FCFS'>First Come First Serve</Link>
           </li>
-        </ul>
+        </ul> */}
         
 
 

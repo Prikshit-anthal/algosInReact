@@ -17,10 +17,11 @@ function App() {
       <Nav />
       <Router>
         <Routes>
-          <Route path={ process.env.PUBLIC_URL + '/'} element={<Homepage />} />
-          <Route path='/towerOfHanoi' element={<TowerOfHanoi />} />
-          <Route path='/FCFS' element={<FCFS />} />
-          <Route path='/sortingalgo' element={<Sortingalgo />} />
+          <Route path={process.env.PUBLIC_URL + '/'} element={<Homepage />} />
+          <Route
+            path={process.env.PUBLIC_URL + '/sortingalgo'}
+            element={<Sortingalgo />}
+          />
         </Routes>
       </Router>
       <Footer />
