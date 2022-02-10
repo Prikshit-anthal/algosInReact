@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/algosInReact/static/css/main.670bc888.css",
-    "main.js": "/algosInReact/static/js/main.09773158.js",
+    "main.js": "/algosInReact/static/js/main.e341f036.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/algosInReact/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/algosInReact/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/algosInReact/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
@@ -9,10 +9,10 @@
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/algosInReact/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "/algosInReact/index.html",
     "main.670bc888.css.map": "/algosInReact/static/css/main.670bc888.css.map",
-    "main.09773158.js.map": "/algosInReact/static/js/main.09773158.js.map"
+    "main.e341f036.js.map": "/algosInReact/static/js/main.e341f036.js.map"
   },
   "entrypoints": [
     "static/css/main.670bc888.css",
-    "static/js/main.09773158.js"
+    "static/js/main.e341f036.js"
   ]
 }
