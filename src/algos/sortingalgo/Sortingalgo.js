@@ -6,7 +6,7 @@ import SortingNav from './Sorting_nav'
 import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
 import Legends from './Legends'
-import { Table, Button } from 'antd'
+import { Table, Button,Slider } from 'antd'
 import { TableSyntax } from './SortConstants'
 import {
   createRandomArray,
@@ -241,7 +241,6 @@ function Sortingalgo() {
                   position: 'relative',
                   overflow: 'hidden',
                   transition: 'width 1s',
-                  
                 }}
                 ref={tagToSlideRef}
               >
@@ -266,7 +265,7 @@ function Sortingalgo() {
           <label className='rangeVertical'>
             <div>Speed</div>
 
-            <input
+            {/* <input
               onChange={(e) => {
                 setSortSpeed(e.target.value)
               }}
@@ -278,7 +277,8 @@ function Sortingalgo() {
               defaultValue={sortSpeed}
               // transform used to show it vertical
               style={{ transform: 'rotateZ(0.75turn)' }}
-            />
+            /> */}
+            <Slider vertical defaultValue={30} />
             <div>{sortSpeed}</div>
           </label>
           {/* middle area for sorting show */}
