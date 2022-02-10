@@ -22,7 +22,11 @@ function Nav(props)
        <div className='sorting_nav flex justify-between items-center flex-wrap bg-teal-600'>
          <div className='breakFlexWithMe'></div>
 
-         <Button type='primary' className='shuffle_sort mx-4 '>
+         <Button
+           type='primary'
+           className='shuffle_sort mx-4 '
+           disabled={sortStatus}
+         >
            Shuffle
          </Button>
          <div className='value_range mx-4'>
@@ -43,7 +47,7 @@ function Nav(props)
                // onInput={setValuerange(0)}
              ></input> */}
              <Slider
-               className="w-32"
+               className='w-32'
                min={5}
                max={100}
                //  disabled={sorting}
@@ -70,6 +74,7 @@ function Nav(props)
          <Button
            type='primary'
            className='sort_visualise  mx-4 '
+           disabled={sortStatus}
            onClick={() => {
              setSortedIndex([])
              handleSort()
