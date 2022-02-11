@@ -11,7 +11,7 @@ const bubbleSort = (blocks) => {
       if (dupBlocks[j] > dupBlocks[j + 1]) {
         swap2ArrayElements(dupBlocks, j, j + 1)
         // order.push([j, j + 1, dupBlocks.slice(), null]) // Swap
-        order.push([j,j+1,true,null]);
+        order.push([j, j + 1, true, null])
       }
     }
     order.push([null, null, null, j]) // j-th element is in correct position ( Sorted )

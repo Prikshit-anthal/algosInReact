@@ -188,14 +188,14 @@ function Sortingalgo() {
     setSortStatus(true)
 
     //calling sort
-    //var op = bubbleSort(randArr)
-    // insertionSort(randArr)
-    // selectionSort(randArr)
-    // mergeSort(randArr)
-    heapSort(randArr)
+    //  var op = bubbleSort(randArr)
+    //var op=insertionSort(randArr)
+    //var op=selectionSort(randArr)
+    var op= mergeSort(randArr)
+    // heapSort(randArr)
     // console.log(op[1]+" ms");
     
-    //sortAccOrder(op)
+    sortAccOrder(op)
 
     // algo === 'bubbleSort'
     //   ? sortAccOrder(bubbleSort(blocks))
