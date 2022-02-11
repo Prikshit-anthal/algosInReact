@@ -6,7 +6,7 @@ import SortingNav from './Sorting_nav'
 import bubbleSort from './algos/Bubblesort'
 import Bars from '../../components/Bars/Bars'
 import Legends from './Legends'
-import { Table, Button,Slider } from 'antd'
+import { Table, Button, Slider } from 'antd'
 import { TableSyntax } from './SortConstants'
 import {
   createRandomArray,
@@ -29,10 +29,10 @@ function Sortingalgo() {
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus, setSortStatus] = useState(false)
   const arrInputREf = useRef(null)
-  const tagToSlideRef=useRef(null);
+  const tagToSlideRef = useRef(null)
   //sort stat results array
   const [resultsArr, setResultsArr] = useState([])
-  const MIN=5;
+  const MIN = 5
   const MAX_NO_OF_BARS =
     window.innerWidth >= 900
       ? 100
@@ -42,11 +42,9 @@ function Sortingalgo() {
       ? 50
       : window.innerWidth >= 400
       ? 30
-      : window.innerWidth>=200
-      ?10
-      :10;
-
-
+      : window.innerWidth >= 200
+      ? 10
+      : 10
 
   //restricting input of array
   useEffect(() => {
@@ -89,9 +87,8 @@ function Sortingalgo() {
       return
     }
     for (var i = 0; i < arr.length; i++) {
-      console.log( typeof arr[i]+" "+isNaN(arr[i]))
-      
-     
+      console.log(typeof arr[i] + ' ' + isNaN(arr[i]))
+
       if (isNaN(arr[i]) || arr[i] > 100 || arr[i] === 0) {
         console.log(!isNaN(arr[i]))
         alert(`array range:(0,${100}] input syntax:val1,val2`)
@@ -100,7 +97,6 @@ function Sortingalgo() {
     }
     setrandArr(arr)
   }
-
 
   //reference for latest value for setTimeout
   const refForSortSpeedLatest = useRef(sortSpeed)
@@ -120,7 +116,7 @@ function Sortingalgo() {
       //creating temporary obj to copy at last in resultsArr
 
       let tempo = {
-        key:0,
+        key: 0,
         sort: 'Bubble',
         comparison: 0,
         swap: 0,
@@ -147,15 +143,23 @@ function Sortingalgo() {
                 setSortedIndex((prevState) => [...prevState, index])
               }
 
-              if (arr_check) {
-                tempo.arrResult = randArr
-                swap2ArrayElements(tempo.arrResult, j, k)
-                //console.log(tempo.arrResult+'  ');
+              
+              if (arr_check instanceof Array) {
+                tempo.arrResult = arr_check
                 setrandArr(tempo.arrResult)
                 if (j !== null || k != null) setSwap([j, k])
-
                 tempo.swap++
-              }
+              } else if (arr_check)//bool
+                 {
+                  
+                  tempo.arrResult = randArr
+                  swap2ArrayElements(tempo.arrResult, j, k)
+                  //console.log(tempo.arrResult+'  ');
+                  setrandArr(tempo.arrResult)
+                  setSwap([j, k])
+                  tempo.swap++
+                }
+              
             }, (100 * 40) / refForSortSpeedLatest.current) //dynamic changing of speed
 
             setTimeout(resolve, (100 * 40) / refForSortSpeedLatest.current) //returning promise
@@ -171,7 +175,7 @@ function Sortingalgo() {
         vis_time += endTime - startTime
         tempo.vis = vis_time
       }
-       //generating new key for table data
+      //generating new key for table data
       resultsArr.length === 0
         ? (tempo.key = 0)
         : (tempo.key = resultsArr[resultsArr.length - 1].key + 1)
@@ -189,12 +193,12 @@ function Sortingalgo() {
 
     //calling sort
     //  var op = bubbleSort(randArr)
-    //var op=insertionSort(randArr)
-    //var op=selectionSort(randArr)
-    var op= mergeSort(randArr)
-    // heapSort(randArr)
+    // var op=insertionSort(randArr)
+    // var op=selectionSort(randArr)
+    // var op = mergeSort(randArr)
+    var op=heapSort(randArr)
     // console.log(op[1]+" ms");
-    
+
     sortAccOrder(op)
 
     // algo === 'bubbleSort'
@@ -213,7 +217,6 @@ function Sortingalgo() {
     //     })()
   }
 
-  
   return (
     <>
       <div className='sorting_container'>

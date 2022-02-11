@@ -5,7 +5,7 @@ const selectionSort = (blocks) => {
   console.log(dupBlocks)
   const order = []
   let i, j,max_idx
-  for (i = dupBlocks.length - 1; i > 0; i--) {
+  for (i = dupBlocks.length - 1; i >= 0; i--) {
     max_idx = i
     for (j = i; j > 0; j--) {
       order.push([max_idx, j - 1, null, null]) // Compare
