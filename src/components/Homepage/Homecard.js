@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react/cjs/react.development';
 import './Homecard.css'
 import { Link } from 'react-router-dom'
 function Card(props)
@@ -15,7 +14,7 @@ function Card(props)
               background: `url('${src}')`,
             }}
           >
-            <div className='title-content'>
+            <div className='title-content m-8'>
               <h3>{title}</h3>
               <hr />
               <div className='intro'>{subtitle}</div>
