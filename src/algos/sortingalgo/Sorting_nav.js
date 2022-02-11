@@ -63,14 +63,19 @@ function Nav(props)
          </div>
          <div className='sortalgos mx-4'>
            <div className='drop_down'>
-             <Select defaultValue={sortUsed} onChange={(value)=>{
-                  setSortUsed(value);
-             }} className='w-32'>
+             <Select
+               defaultValue={sortUsed}
+               disabled={sortStatus}
+               onChange={(value) => {
+                 setSortUsed(value)
+               }}
+               className='w-32'
+             >
                <Option value='bubbleSort'>Bubble sort</Option>
-               <option value="selectionSort">Selection sort</option>
+               <option value='selectionSort'>Selection sort</option>
                <Option value='insertionSort'>Insertion sort</Option>
                <Option value='heapSort'>Heap sort</Option>
-               {/* <Option value='quickSort'>Quick sort</Option> */}
+               <Option value='mergeSort'>Merge sort</Option>
              </Select>
            </div>
          </div>

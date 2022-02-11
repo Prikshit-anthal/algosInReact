@@ -1,22 +1,4 @@
-.nav_container{
-   
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
-    background-color: black;
-   
-}
-.nav_container a{
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    color: white;
-}
-.nav_container div{
-    align-self:center ;
-    padding: 0px 5px;
-}
+
 
 #nav_title{
     margin: 0 auto;

@@ -229,7 +229,7 @@ function Sortingalgo() {
             setSortedIndex: setSortedIndex,
             sortStatus: sortStatus,
             sortUsed: sortUsed,
-            setSortUsed:setsortUsed,
+            setSortUsed: setsortUsed,
           }}
         />
 
@@ -344,22 +344,25 @@ function Sortingalgo() {
             <div>{value2range}</div>
           </label>
         </div>
-        <br />
-        {resultsArr.length === 0 ? (
-          <></>
-        ) : (
-          <Table
-            className='mx-auto'
-            style={{ width: '75vw' }}
-            columns={TableSyntax}
-            dataSource={resultsArr}
-            pagination={{
-              position: ['none', 'none'],
-            }}
-            scroll={{ x: 800, y: 400 }}
-          />
-        )}
-        <br />
+
+        <div style={{backgroundColor: 'rgb(233, 233, 240)'}}>
+          <br />
+          {resultsArr.length === 0 ? (
+            <></>
+          ) : (
+            <Table
+              className='mx-auto'
+              style={{ width: '75vw' }}
+              columns={TableSyntax}
+              dataSource={resultsArr}
+              pagination={{
+                position: ['none', 'none'],
+              }}
+              scroll={{ x: 800, y: 400 }}
+            />
+          )}
+          <br />
+        </div>
       </div>
     </>
   )

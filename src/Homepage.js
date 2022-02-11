@@ -10,7 +10,10 @@ function Homepage()
         <div className='home_header'>
           Visualize algorithms for a better understanding
         </div>
-        <Homegrid/>
+        <div className='min-h-screen'>
+          <Homegrid />
+        </div>
+
         {/* <ul>
           <li>
             <Link to='/towerOfHanoi'>Tower of Hanoi</Link>
@@ -20,11 +23,6 @@ function Homepage()
             <Link to='/FCFS'>First Come First Serve</Link>
           </li>
         </ul> */}
-        
-
-
-
-
       </>
     )
 }
