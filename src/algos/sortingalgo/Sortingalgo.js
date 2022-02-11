@@ -28,6 +28,7 @@ function Sortingalgo() {
   const [swap, setSwap] = useState([])
   const [sortedIndex, setSortedIndex] = useState([])
   const [sortStatus, setSortStatus] = useState(false)
+  const [sortUsed,setsortUsed]=useState('bubbleSort')
   const arrInputREf = useRef(null)
   const tagToSlideRef = useRef(null)
   //sort stat results array
@@ -114,10 +115,10 @@ function Sortingalgo() {
       var order = op[0]
 
       //creating temporary obj to copy at last in resultsArr
-
+    console.log(sortUsed)
       let tempo = {
         key: 0,
-        sort: 'Bubble',
+        sort: sortUsed,
         comparison: 0,
         swap: 0,
         vis: 0,
@@ -196,25 +197,24 @@ function Sortingalgo() {
     // var op=insertionSort(randArr)
     // var op=selectionSort(randArr)
     // var op = mergeSort(randArr)
-    var op=heapSort(randArr)
+    // var op=heapSort(randArr)
     // console.log(op[1]+" ms");
 
-    sortAccOrder(op)
+    // sortAccOrder(op)
 
-    // algo === 'bubbleSort'
-    //   ? sortAccOrder(bubbleSort(blocks))
-    //   : algo === 'insertionSort'
-    //   ? sortAccOrder(insertionSort(blocks))
-    //   : algo === 'selectionSort'
-    //   ? sortAccOrder(selectionSort(blocks))
-    //   : algo === 'mergeSort'
-    //   ? sortAccOrder(mergeSort(blocks))
-    //   : algo === 'quickSort'
-    //   ? sortAccOrder(quickSort(blocks))
-    //   : (() => {
-    //       setSorting(false)
-    //       setCompleted(true)
-    //     })()
+    sortUsed === 'bubbleSort'
+      ? sortAccOrder(bubbleSort(randArr))
+      : sortUsed === 'insertionSort'
+      ? sortAccOrder(insertionSort(randArr))
+      : sortUsed === 'selectionSort'
+      ? sortAccOrder(selectionSort(randArr))
+      : sortUsed === 'mergeSort'
+      ? sortAccOrder(mergeSort(randArr))
+      : sortUsed === 'heapSort'
+      ? sortAccOrder(heapSort(randArr))
+      : (() => {
+          setSortStatus(false)
+        })()
   }
 
   return (
@@ -228,6 +228,8 @@ function Sortingalgo() {
             handleSort: handleSort,
             setSortedIndex: setSortedIndex,
             sortStatus: sortStatus,
+            sortUsed: sortUsed,
+            setSortUsed:setsortUsed,
           }}
         />
 

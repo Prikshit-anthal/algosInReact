@@ -5,7 +5,7 @@ const heapSort = (blocks) => {
     
   const dupBlocks = blocks.slice() // copying blocks array
   const order=[]
-  console.log(dupBlocks)
+  // console.log(dupBlocks)
   var dupBlocksLength=dupBlocks.length;
   var gettingMinusLength = dupBlocks.length;
 
@@ -61,7 +61,7 @@ const heapSort = (blocks) => {
   heapSortprocedure();
 
 
-  console.log(dupBlocks)
+  // console.log(dupBlocks)
   return [order,blocks]
 }
 

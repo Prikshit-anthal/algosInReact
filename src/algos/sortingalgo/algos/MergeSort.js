@@ -3,7 +3,7 @@ import { swap2ArrayElements } from '../../../constants'
 const mergeSort = (blocks) => {
   const dupBlocks = blocks.slice() // copying blocks array
   const order=[];
-  console.log(dupBlocks)
+  // console.log(dupBlocks)
  
   const mergeSortWorking=(r,l)=>{
         let mid_idx=parseInt((r+l)/2);
@@ -53,7 +53,7 @@ const mergeSort = (blocks) => {
   }
   mergeSortWorking(0,dupBlocks.length-1);
 
-  console.log(dupBlocks)
+  // console.log(dupBlocks)
   return [order,blocks]
 }
 

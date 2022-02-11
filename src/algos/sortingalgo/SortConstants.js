@@ -10,7 +10,7 @@ export const TableSyntax = [
   {
     title: 'sort',
     dataIndex: 'sort',
-    width: 100,
+    width: 150,
   },
   {
     title: 'arrResult',

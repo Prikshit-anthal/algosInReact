@@ -2,7 +2,7 @@ import { swap2ArrayElements } from '../../../constants'
 
 const insertionSort = (blocks) => {
   const dupBlocks = blocks.slice() // copying blocks array
-  console.log(dupBlocks)
+  // console.log(dupBlocks)
   const order = []
   let i, j
   for (i = 1; i < dupBlocks.length; i++) {
@@ -24,7 +24,7 @@ const insertionSort = (blocks) => {
     
   }
 
-console.log(dupBlocks);
+// console.log(dupBlocks);
 return [order, blocks]
 }
 

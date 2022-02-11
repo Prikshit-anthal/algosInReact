@@ -10,7 +10,8 @@ function Nav(props)
        handleSort,
        sortStatus,
        setSortedIndex,
-       
+       sortUsed,
+       setSortUsed
      } = props.obj
 
      
@@ -62,11 +63,14 @@ function Nav(props)
          </div>
          <div className='sortalgos mx-4'>
            <div className='drop_down'>
-             <Select defaultValue='bubble' className='w-32'>
-               <Option value='bubble'>Bubble sort</Option>
-               <Option value='insertion'>Insertion sort</Option>
-               <Option value='heap'>Heap sort</Option>
-               <Option value='quick'>Quick sort</Option>
+             <Select defaultValue={sortUsed} onChange={(value)=>{
+                  setSortUsed(value);
+             }} className='w-32'>
+               <Option value='bubbleSort'>Bubble sort</Option>
+               <option value="selectionSort">Selection sort</option>
+               <Option value='insertionSort'>Insertion sort</Option>
+               <Option value='heapSort'>Heap sort</Option>
+               {/* <Option value='quickSort'>Quick sort</Option> */}
              </Select>
            </div>
          </div>
