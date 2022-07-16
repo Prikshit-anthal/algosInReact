@@ -31,7 +31,7 @@ export const TableSyntax = [
   {
     title: 'arrUsed',
     dataIndex: 'arrUsed',
-    // width: 100,
+     width: 100,
     render: (val, data, index) => (
       <div className='w-32 overflow-x-scroll whitespace-nowrap' key={index}>
         {val.map((item, idx) =>

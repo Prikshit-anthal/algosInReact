@@ -9,19 +9,22 @@ import FCFS from './algos/FirstComeFirstServe'
 import Nav from './Navbar'
 import Footer from "./Footer"
 import Sortingalgo from "./algos/sortingalgo/Sortingalgo"
+import PathfindingVisualizer from './PathfindingVisualizer/PathfindingVisualizer'
+
 
 function App() {
   document.title = 'Ds-Algos'
   return (
     <>
       <Nav />
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route
-            path='/sortingalgo'
-            element={<Sortingalgo />}
-          />
-        </Routes>
+      <Routes>
+        <Route path='/' element={<Homepage />} />
+        <Route path='/sortingalgo' element={<Sortingalgo />} />
+        <Route
+          path='/PathfindingVisualizer'
+          element={<PathfindingVisualizer />}
+        />
+      </Routes>
       <Footer />
     </>
   )

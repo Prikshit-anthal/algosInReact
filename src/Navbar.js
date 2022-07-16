@@ -10,7 +10,7 @@ function Nav(P)
             href='/algosInReact'
             className='flex items-center text-xl text-white'
           >
-            <div>Home</div>
+            <div className="ml-4">Home</div>
           </a>
         </div>
         <div className='flex justify-center w-full'>
