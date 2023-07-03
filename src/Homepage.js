@@ -12,6 +12,7 @@ function Homepage()
         </div>
         <div className='min-h-screen'>
           <Homegrid />
+          
         </div>
 
         {/* <ul>
