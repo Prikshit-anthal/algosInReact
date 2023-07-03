@@ -28,10 +28,10 @@ export const Homegriddata = [
   //   desc: '',
   // },
   {
-    src: 'https://nordvigtech.com/wp-content/uploads/2020/12/ds_algo.jpg',
-    title: 'More Yet To Come',
-    link: '#',
-    subtitle: 'SOS',
-    desc: '',
+    src: 'https://storage.googleapis.com/algodailyrandomassets/tutorials-optimized/binarySearch1.png',
+    title: 'Binary Search',
+    link: '/binarySearch',
+    subtitle: 'Visualise',
+    desc: 'Binary Search is defined as a searching algorithm used in a sorted array by repeatedly dividing the search interval in half. The idea of binary search is to use the information that the array is sorted and reduce the time complexity to O(log N). ',
   },
 ]

@@ -10,7 +10,7 @@ import Nav from './Navbar'
 import Footer from "./Footer"
 import Sortingalgo from "./algos/sortingalgo/Sortingalgo"
 import PathfindingVisualizer from './PathfindingVisualizer/PathfindingVisualizer'
-
+import BinarySearch from './binarySearchComponent/binarySearch'
 
 function App() {
   document.title = 'Ds-Algos'
@@ -24,6 +24,7 @@ function App() {
           path='/PathfindingVisualizer'
           element={<PathfindingVisualizer />}
         />
+        <Route path='/binarySearch' element={<BinarySearch/>} />
       </Routes>
       <Footer />
     </>
